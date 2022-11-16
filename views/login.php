@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>NB Carwash - Login</title>
-    <link rel="stylesheet" href="<?= ASSET_PATH.'vendor/css/pages/page-auth.css'?>" />
+    <link rel="stylesheet" href="<?= ASSET_PATH . 'vendor/css/pages/page-auth.css' ?>" />
     <?php
-        include VIEW_PATH.'template/header.php';
+    include VIEW_PATH . 'template/header.php';
     ?>
 </head>
 
@@ -54,7 +54,7 @@
 
     <!-- / Content -->
     <?php
-        require VIEW_PATH.'template/footer.php';
+    require VIEW_PATH . 'template/footer.php';
     ?>
 </body>
 

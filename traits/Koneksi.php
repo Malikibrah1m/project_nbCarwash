@@ -12,8 +12,8 @@ trait Koneksi
          * $db = "native";
          */
         $server = "localhost";
-        $username = "adi_sptro";
-        $password = "12345678";
+        $username = "root";
+        $password = "";
         $db = "nb-carwash";
         $koneksi = mysqli_connect($server, $username, $password, $db);
 
