@@ -1,8 +1,7 @@
 <?php
 require_once 'vendor/autoload.php';
 define('APP_PATH', './');
-define('BASE_URL', 'http://localhost/project-sms3-Carwash/');
-
+define('BASE_URL', $_ENV['URL_PATH']);
 define('CONTROLLER_PATH', APP_PATH . 'controllers/');
 define('VIEW_PATH', APP_PATH . 'views/');
 define('API_CONTROLLER_PATH', APP_PATH . 'controllers/api/');
@@ -30,11 +29,13 @@ ini_set('display_errors', 'On');
  * URL == URI Tapi URI != URL
  *  
  */
-
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
-if (strtolower($uri[3]) == "api") {
-    $class = ucfirst($uri[4]);
+// print_r($uri[2]);
+if (strtolower($uri[2]) == "api") {
+    $class = ucfirst($uri[3]);
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
     $targetClass = $class . 'Controller';
     $controller = new $targetClass();
@@ -45,7 +46,7 @@ if (strtolower($uri[3]) == "api") {
     }
     $controller->$strMethodName();
 } else {
-    if ($uri[3] == "") {
+    if ($uri[2] == "") {
         $indx = new IndexController();
         $indx->getIndex();
     } else {
