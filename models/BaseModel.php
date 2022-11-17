@@ -31,18 +31,24 @@ class BaseModel
             )
         );
     }
-    public function rawQuery($str)
+
+    /**
+     * @param mixed $mysql_syntax
+     * syntax Mysql
+     * @return $this
+     */
+    public function rawQuery($mysql_syntax)
     {
-        $result = $this->mysql()->query($str);
+        $result = $this->mysql()->query($mysql_syntax);
         $this->result = $result;
         return $this;
     }
 
 
 
-    public function where($condition)
+    public function where($condition,$separator = '=')
     {
-        $where = $this->mapped_where(' ,', $condition);
+        $where = $this->mapped_where(' ,', $condition,$separator);
         $sql = "select * from $this->table where $where";
         // echo $sql;
         $result = $this->mysql()->query($sql);
@@ -50,6 +56,11 @@ class BaseModel
         return $this;
     }
 
+    /**
+     * 
+     * Get semua data..
+     * @return \mysqli_result|bool
+     */
     public function get()
     {
         return $this->result;
