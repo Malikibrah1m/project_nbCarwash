@@ -4,6 +4,8 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.5",
-        "firebase/php-jwt": "^6.3"
+        "firebase/php-jwt": "^6.3",
+        "laravolt/avatar": "^4.1",
+        "phpoffice/phpspreadsheet": "^1.25"
     }
 }
