@@ -15,13 +15,18 @@
 
 <body>
     <!-- Content -->
-
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
                 <!-- Register -->
                 <div class="card">
                     <div class="card-body">
+                        <?php
+                        if ($_GET['error'] == 'true' || !empty($_GET['error'])) { ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Maaf</strong> <?=$_GET['message']?>
+                        </div>
+                        <?php }else{ echo '';} ?>
                         <p class="mb-4">Masukkan email dan password anda</p>
 
                         <form id="formAuthentication" class="mb-3" action="auth/login" method="POST">

@@ -2,7 +2,7 @@
 
 class AuthController extends BaseController
 {
-    // use Auth;
+    
     private $user;
     public function __construct()
     {
@@ -14,7 +14,7 @@ class AuthController extends BaseController
         $email = $this->post('email');
         $password = $this->post('password');
         $user = $this->user->where(['email' => $email])->get();
-        echo $password;
+        // echo $password;
         if ($user) {
             $user = mysqli_fetch_assoc($user);
             if (password_verify($password, $user['password'])) {

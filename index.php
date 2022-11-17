@@ -1,5 +1,10 @@
 <?php
+
+use Laravolt\Avatar\Avatar;
+
 require_once 'vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 define('APP_PATH', './');
 define('BASE_URL', $_ENV['URL_PATH']);
 define('CONTROLLER_PATH', APP_PATH . 'controllers/');
@@ -10,8 +15,9 @@ define('TRAIT_PATH', APP_PATH . 'traits/');
 define('ASSET_PATH', APP_PATH . 'assets/');
 define('URL_PATH', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 
-error_reporting(E_ALL);
+error_reporting(E_ERROR);
 ini_set('display_errors', 'On');
+
 
 
 /**
@@ -29,8 +35,7 @@ ini_set('display_errors', 'On');
  * URL == URI Tapi URI != URL
  *  
  */
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 // print_r($uri[2]);
@@ -62,4 +67,21 @@ if (strtolower($uri[2]) == "api") {
         }
         $controller->$strMethodName();
     }
+}
+
+
+function avatar($nama)
+{
+    $avatar = new Avatar();
+    return $avatar->create($nama)->setBackground('#696CFF');
+}
+
+function getActivePage($nama_page)
+{
+    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $uri = explode('/', $uri);
+    if ($uri[2] == $nama_page) {
+        return "active";
+    }
+    return "";
 }

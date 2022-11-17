@@ -1,17 +1,10 @@
 <?php
 class AdminController extends BaseController
 {
-
-    public function __construct()
-    {
-        session_start();
-        if (!$_SESSION['user']) {
-            header("Location: " . BASE_URL . "?error=true&message=Anda harus login");
-        }
-    }
+    use LoginCheck;
     public function getIndex()
     {
-        print_r($_SESSION['user']['email']);
-        // $this->view('tes');
+        // print_r($_SESSION['user']['email']);
+        return $this->view('admin.index');
     }
 }
