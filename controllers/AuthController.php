@@ -20,6 +20,8 @@ class AuthController extends BaseController
             if (password_verify($password, $user['password'])) {
                 $_SESSION["user"] = $user;
                 header("Location: " . BASE_URL . "admin");
+            }else{
+                header("Location: " . BASE_URL . "?error=true&&message=Cek kembali email atau password anda");
             }
         }
     }

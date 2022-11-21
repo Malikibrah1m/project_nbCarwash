@@ -14,6 +14,7 @@ return array(
     'BaseController' => $baseDir . '/controllers/BaseController.php',
     'BaseModel' => $baseDir . '/models/BaseModel.php',
     'Booking' => $baseDir . '/models/Booking.php',
+    'BookingAPIController' => $baseDir . '/controllers/api/BookingController.php',
     'BookingController' => $baseDir . '/controllers/BookingController.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DetailPencucian' => $baseDir . '/models/DetailPencucian.php',
@@ -30,6 +31,6 @@ return array(
     'Stringable' => $vendorDir . '/myclabs/php-enum/stubs/Stringable.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'User' => $baseDir . '/models/User.php',
-    'UserController' => $baseDir . '/controllers/api/UserController.php',
+    'UserAPIController' => $baseDir . '/controllers/api/UserController.php',
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );

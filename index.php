@@ -42,12 +42,12 @@ $uri = explode('/', $uri);
 if (strtolower($uri[2]) == "api") {
     $class = ucfirst($uri[3]);
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-    $targetClass = $class . 'Controller';
+    $targetClass = $class . 'APIController';
     $controller = new $targetClass();
-    if (empty($uri[6])) {
+    if (empty($uri[4])) {
         $strMethodName = $requestMethod . 'Index';
     } else {
-        $strMethodName = $requestMethod . ucfirst($uri[5]);
+        $strMethodName = $requestMethod . ucfirst($uri[4]);
     }
     $controller->$strMethodName();
 } else {
