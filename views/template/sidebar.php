@@ -74,13 +74,6 @@
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengeluaran</span></li>
-      <li class="menu-item <?=getActivePage('pengeluaran')?>">
-        <a href="<?=BASE_URL?>pengeluaran" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-dollar"></i>
-          <div data-i18n="Analytics">Data Pengeluaran</div>
-        </a>
-      </li>
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
       <li class="menu-item {{ Route::currentRouteName() == 'admin.transaction' ? 'active' : ''}}">
         <a href="{{route('admin.transaction')}}" class="menu-link">
