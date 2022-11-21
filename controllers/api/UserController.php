@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends ApiController{
+class UserAPIController extends ApiController{
 
     /**
      * method yang akan di panggil ketika aplikasi dijalankan
@@ -9,7 +9,7 @@ class UserController extends ApiController{
      * }
      */
 
-    public function getList()
+    public function getIndex()
     {
         // $user = new User();
         // while ($row = mysqli_fetch_assoc($user->get())) {
@@ -19,8 +19,9 @@ class UserController extends ApiController{
         //         break;
         //     }
         // }
-        $data = $this->input()->get('id');
-        $this->succesResponse($data);
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $data = $_GET['id'];
+        $this->succesResponse($uri);
     }
 
     public function postInsert()

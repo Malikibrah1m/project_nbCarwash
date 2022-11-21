@@ -214,6 +214,7 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'BaseController' => __DIR__ . '/../..' . '/controllers/BaseController.php',
         'BaseModel' => __DIR__ . '/../..' . '/models/BaseModel.php',
         'Booking' => __DIR__ . '/../..' . '/models/Booking.php',
+        'BookingAPIController' => __DIR__ . '/../..' . '/controllers/api/BookingController.php',
         'BookingController' => __DIR__ . '/../..' . '/controllers/BookingController.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DetailPencucian' => __DIR__ . '/../..' . '/models/DetailPencucian.php',
@@ -230,7 +231,7 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'User' => __DIR__ . '/../..' . '/models/User.php',
-        'UserController' => __DIR__ . '/../..' . '/controllers/api/UserController.php',
+        'UserAPIController' => __DIR__ . '/../..' . '/controllers/api/UserController.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 

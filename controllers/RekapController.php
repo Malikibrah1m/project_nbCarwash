@@ -5,10 +5,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class RekapController extends BaseController
 {
-    use LoginCheck;
     private $profit;
     public function __construct()
     {
+        session_start();
         $profit = new Profit();
         $this->profit = $profit;
     }

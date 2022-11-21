@@ -59,7 +59,7 @@
                             <h5 class="card-header">Data Rekap</h5>
                             <div class="" style="padding-left: 2rem; padding-bottom: 2rem; padding-right: 2rem;">
                                 <div style="padding-top: 1rem">
-                                    <form action="<?=BASE_URL?>rekap/export" method="POST">
+                                    <form action="<?= BASE_URL ?>rekap/export" method="POST">
                                         <div class="row g-3" style="padding-bottom: 1rem;">
                                             <div class="col-md-3">
                                                 <input class="datepicker-here form-control digits" name="date" type="text" id="daterange" data-date-format="yyyy-mm-dd" data-range="true" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
@@ -129,21 +129,12 @@
 
         function loadrekapTable() {
             var url = "<?= BASE_URL ?>rekap/rekap_data";
-             $('#rekapTable').DataTable({
-                columnDefs: [{
-                    searchable: false,
-                    orderable: false,
-                    targets: 0,
-                }, ],
-                order: [
-                    [1, 'asc']
-                ],
-                "bInfo": false,
+            $('#rekapTable').DataTable({
                 searching: true,
                 paging: true,
                 destroy: true,
                 "ordering": false,
-                serverSide: true,
+                // serverSide: true,
                 ajax: url,
                 columns: [{
                         data: 'date',
