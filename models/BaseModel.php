@@ -11,6 +11,18 @@ class BaseModel
         return $result;
     }
 
+    public function rest()
+    {
+        $data = $this->all();
+
+        $items = [];
+        while ($item = mysqli_fetch_assoc($data)) {
+            array_push($items, $item);
+        }
+
+        return $items;
+    }
+
     // public function getData($table)
     // {
     //     $sql = "select * from $table";
@@ -46,9 +58,9 @@ class BaseModel
 
 
 
-    public function where($condition,$separator = '=')
+    public function where($condition, $separator = '=')
     {
-        $where = $this->mapped_where(' ,', $condition,$separator);
+        $where = $this->mapped_where(' ,', $condition, $separator);
         $sql = "select * from $this->table where $where";
         // echo $sql;
         $result = $this->mysql()->query($sql);
