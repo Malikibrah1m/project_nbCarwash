@@ -44,4 +44,7 @@
     .datepicker--cell .datepicker--cell-day .-selected- {
         background-color: rgb(105, 108, 255);
     }
+    .datepicker {
+        z-index: 2051 !important;
+    }
 </style>

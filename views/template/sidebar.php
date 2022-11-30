@@ -88,8 +88,8 @@
           <div data-i18n="Analytics">Transaksi</div>
         </a>
       </li>
-      <li class="menu-item {{ Route::currentRouteName() == 'admin.booking.index' ? 'active' : ''}}">
-        <a href="{{route('admin.booking.index')}}" class="menu-link">
+      <li class="menu-item <?=getActivePage('reservasi')?>">
+        <a href="<?=BASE_URL?>reservasi" class="menu-link">
           <i class="menu-icon tf-icons bx bx-detail"></i>
           <div data-i18n="Analytics">Reservasi</div>
         </a>
@@ -101,8 +101,8 @@
         </a>
       </li>
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Keuntungan</span></li>
-      <li class="menu-item {{ Route::currentRouteName() == 'admin.profit.index' ? 'active' : ''}}">
-        <a href="{{route('admin.profit.index')}}" class="menu-link">
+      <li class="menu-item  <?=getActivePage('keuntungan')?>">
+        <a href="<?=BASE_URL?>keuntungan" class="menu-link">
           <i class="menu-icon tf-icons bx bx-wallet"></i>
           <div data-i18n="Analytics">Jumlah Keuntungan</div>
         </a>
