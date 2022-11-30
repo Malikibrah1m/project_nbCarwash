@@ -9,6 +9,10 @@ class RekapController extends BaseController
     public function __construct()
     {
         session_start();
+
+        if (!$_SESSION['user']) {
+            return header("location: ".BASE_URL);
+        }
         $profit = new Profit();
         $this->profit = $profit;
     }
