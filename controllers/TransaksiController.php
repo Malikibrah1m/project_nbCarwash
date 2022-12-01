@@ -2,6 +2,8 @@
 
 class TransaksiController extends BaseController
 {
+    private Transaksi $model;
+
     public function __construct()
     {
         $this->model = new Transaksi();
@@ -9,9 +11,8 @@ class TransaksiController extends BaseController
 
     public function getIndex()
     {
-        $data = $this->model->rest();
+        $data = $this->model->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id")->get();
 
-        header('Content-Type: application/json');
-        echo json_encode($data);
+        return $this->view('admin.transaksi', ['transaksi' => $data]);
     }
 }

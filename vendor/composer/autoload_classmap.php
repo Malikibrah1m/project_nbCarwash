@@ -29,6 +29,8 @@ return array(
     'RekapController' => $baseDir . '/controllers/RekapController.php',
     'Request' => $baseDir . '/traits/Request.php',
     'Stringable' => $vendorDir . '/myclabs/php-enum/stubs/Stringable.php',
+    'Transaksi' => $baseDir . '/models/Transaksi.php',
+    'TransaksiController' => $baseDir . '/controllers/TransaksiController.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'User' => $baseDir . '/models/User.php',
     'UserAPIController' => $baseDir . '/controllers/api/UserController.php',

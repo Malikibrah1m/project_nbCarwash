@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<?= ASSET_PATH . '/css/demo.css' ?>" />
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="<?= ASSET_PATH . '/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' ?>" />
-<link rel="stylesheet" href="<?= ASSET_PATH . '/vendor/libs/datatable/datatables/datatables.css' ?>" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css" />
 <link rel="stylesheet" href="<?= ASSET_PATH . '/vendor/libs/select2/select2.css' ?>" />
 <link rel="stylesheet" href="<?= ASSET_PATH . '/vendor/libs/sweet-alert/sweetalert2.css' ?>" />
 <link rel="stylesheet" href="<?= ASSET_PATH . '/vendor/libs/evo-calendar/css/evo-calendar.min.css' ?>" />
@@ -43,5 +43,13 @@
 
     .datepicker--cell .datepicker--cell-day .-selected- {
         background-color: rgb(105, 108, 255);
+    }
+
+    /* table.dataTable.no-footer {
+        border-bottom: none transparent !important;
+    } */
+
+    table.dataTable {
+        margin-bottom: 20px !important;
     }
 </style>
