@@ -60,8 +60,7 @@
         <div data-i18n="Analytics">Data Pengeluaran</div>
       </a>
     </li>
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Transaksi</span></li>
-    <li class="menu-item {{ Route::currentRouteName() == 'admin.transaction' ? 'active' : ''}}">
+    <li class="menu-item <?= getActivePage('transaksi') ?>">
       <a href="<?= BASE_URL ?>transaksi" class="menu-link">
         <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
         <div data-i18n="Analytics">Transaksi</div>
