@@ -2,19 +2,11 @@
 
 class TransaksiController extends BaseController
 {
-<<<<<<< HEAD
-    private Transaksi $model;
-
-    public function __construct()
-    {
-        $this->model = new Transaksi();
-=======
     private Transaction $model;
 
     public function __construct()
     {
         $this->model = new Transaction();
->>>>>>> 1a9c8787c7d6a1e098ad4581f33f143b18c7813e
     }
 
     public function getIndex()

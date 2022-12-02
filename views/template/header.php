@@ -44,17 +44,8 @@
     .datepicker--cell .datepicker--cell-day .-selected- {
         background-color: rgb(105, 108, 255);
     }
-<<<<<<< HEAD
 
-    /* table.dataTable.no-footer {
-        border-bottom: none transparent !important;
-    } */
-
-    table.dataTable {
-        margin-bottom: 20px !important;
-=======
     .datepicker {
         z-index: 2051 !important;
->>>>>>> 1a9c8787c7d6a1e098ad4581f33f143b18c7813e
     }
 </style>
