@@ -56,7 +56,7 @@
 
             <!-- Content -->
 
-            <?php print_r($_SESSION);?>
+            <?php print_r($_SESSION['user']);?>
             
             <!--/ Card layout -->
           </div>

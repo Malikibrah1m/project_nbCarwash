@@ -219,21 +219,30 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DetailPencucian' => __DIR__ . '/../..' . '/models/DetailPencucian.php',
         'IndexController' => __DIR__ . '/../..' . '/controllers/IndexController.php',
+        'KeuntunganController' => __DIR__ . '/../..' . '/controllers/KeuntunganController.php',
         'Koneksi' => __DIR__ . '/../..' . '/traits/Koneksi.php',
         'LoginCheck' => __DIR__ . '/../..' . '/traits/Auth.php',
         'LoginController' => __DIR__ . '/../..' . '/controllers/api/LoginController.php',
         'LogoutController' => __DIR__ . '/../..' . '/controllers/api/LogoutController.php',
         'PencucianController' => __DIR__ . '/../..' . '/controllers/PencucianController.php',
+        'PengeluaranController' => __DIR__ . '/../..' . '/controllers/PengeluaranController.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'Profit' => __DIR__ . '/../..' . '/models/Profit.php',
         'RekapController' => __DIR__ . '/../..' . '/controllers/RekapController.php',
         'Request' => __DIR__ . '/../..' . '/traits/Request.php',
+        'ReservasiController' => __DIR__ . '/../..' . '/controllers/ReservasiController.php',
+        'Spend' => __DIR__ . '/../..' . '/models/Spend.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
+<<<<<<< HEAD
         'Transaksi' => __DIR__ . '/../..' . '/models/Transaksi.php',
+=======
+        'Transaction' => __DIR__ . '/../..' . '/models/Transaction.php',
+>>>>>>> 1a9c8787c7d6a1e098ad4581f33f143b18c7813e
         'TransaksiController' => __DIR__ . '/../..' . '/controllers/TransaksiController.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'User' => __DIR__ . '/../..' . '/models/User.php',
         'UserAPIController' => __DIR__ . '/../..' . '/controllers/api/UserController.php',
+        'UserController' => __DIR__ . '/../..' . '/controllers/UserController.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
