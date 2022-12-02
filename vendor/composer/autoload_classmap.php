@@ -33,11 +33,7 @@ return array(
     'ReservasiController' => $baseDir . '/controllers/ReservasiController.php',
     'Spend' => $baseDir . '/models/Spend.php',
     'Stringable' => $vendorDir . '/myclabs/php-enum/stubs/Stringable.php',
-<<<<<<< HEAD
-    'Transaksi' => $baseDir . '/models/Transaksi.php',
-=======
     'Transaction' => $baseDir . '/models/Transaction.php',
->>>>>>> 1a9c8787c7d6a1e098ad4581f33f143b18c7813e
     'TransaksiController' => $baseDir . '/controllers/TransaksiController.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'User' => $baseDir . '/models/User.php',
