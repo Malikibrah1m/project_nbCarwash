@@ -32,7 +32,7 @@ class PengeluaranController extends BaseController
             }
         }
         // echo $weekStartDate.' - '.$weekEndDate;
-        return $this->view('admin.pengeluaran',$data);
+        return $this->view('admin.pengeluaran', $data);
     }
 
     public function getPengeluaran_data()
@@ -44,8 +44,6 @@ class PengeluaranController extends BaseController
             while ($row = $pengeluaran->fetch_assoc()) {
                 $data[] = $row;
             }
-        } else {
-            echo "0 results";
         }
         // print_r($data);
         echo json_encode(array('data' => $data));
@@ -59,7 +57,7 @@ class PengeluaranController extends BaseController
         $total = $this->post('total');
         $process = $this->pengeluaran->rawQuery("INSERT INTO `spends`(`keterangan`, `date`, `total`) VALUES ('$ket','$date','$total')")->get();
         if ($process) {
-            echo json_encode(array('message'=>'success'));
+            echo json_encode(array('message' => 'success'));
         }
     }
 
@@ -67,6 +65,6 @@ class PengeluaranController extends BaseController
     {
         $id = $this->get('id');
         $process = $this->pengeluaran->rawQuery("DELETE FROM `spends` WHERE id = '$id'");
-        echo json_encode(array('message'=>'Data berhasil dihapus'));
+        echo json_encode(array('message' => 'Data berhasil dihapus'));
     }
 }

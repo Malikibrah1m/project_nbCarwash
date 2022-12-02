@@ -234,6 +234,7 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'Spend' => __DIR__ . '/../..' . '/models/Spend.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
         'Transaction' => __DIR__ . '/../..' . '/models/Transaction.php',
+        'TransaksiController' => __DIR__ . '/../..' . '/controllers/TransaksiController.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'User' => __DIR__ . '/../..' . '/models/User.php',
         'UserAPIController' => __DIR__ . '/../..' . '/controllers/api/UserController.php',
