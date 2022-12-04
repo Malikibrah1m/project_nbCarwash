@@ -13,13 +13,18 @@ class AuthController extends BaseController
         $email = $this->post('email');
         $password = $this->post('password');
         $user = $this->user->where(['email'=>$email])->get();
-        echo $password;
+        // echo $password;
         if ($user) {
             $user = mysqli_fetch_assoc($user);
+            // var_dump($user);
             if (password_verify($password,$user['password'])) {
                 $_SESSION["user"] = $user;
                 header("Location: ".BASE_URL."admin");
-            }   
+            } else {
+                echo "Password wrong";
+            }
+        } else {
+            echo "User not Found";
         }
         // $data['hello'] = "Hello World";
         // $template = 'subfolder.tes12';
