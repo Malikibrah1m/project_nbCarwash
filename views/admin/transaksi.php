@@ -52,33 +52,62 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Reservasi </h4>
-                        <!-- Content -->
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Transaksi </h4>
+
                         <div class="card">
-                            <h5 class="card-header">Data Reservasi</h5>
+                            <h5 class="card-header">Data Transaksi</h5>
+
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
+                                </pre>
                                 <div class="table-responsive text-nowrap">
-                                    <table class="table" id="bookingTable">
+                                    <table class="table" id="transaksiTable">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>ID</th>
-                                                <th>Nama Pemilik</th>
+                                                <th>No.</th>
+                                                <th>Nama</th>
+                                                <th>No. Hp</th>
+                                                <th>Tipe pencucian</th>
                                                 <th>Plat Nomor</th>
-                                                <th>Merk Model</th>
-                                                <th>Detail Pencucian</th>
-                                                <th>Total</th>
-                                                <th>Jam</th>
+                                                <th>Merk Kendaraan</th>
+                                                <th>waktu</th>
                                                 <th>Tanggal</th>
+                                                <th>Total harga</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            <?php
+                                            $no = 1;
+                                            while ($item = mysqli_fetch_array($transaksi)) :
+                                            ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $item['name'] ?></td>
+                                                    <td><?= $item['no_hp'] ?></td>
+                                                    <td><?= $item['wash_type_name'] ?></td>
+                                                    <td><?= $item['plate_number'] ?></td>
+                                                    <td><?= $item['merk_model'] ?></td>
+                                                    <td><?= $item['time'] ?></td>
+                                                    <td><?= $item['date'] ?></td>
+                                                    <td><?= $item['total'] ?></td>
+                                                    <td><span>
+                                                            <!-- <button type="button" class="btn btn-icon me-2 btn-primary">
+                                                                <span class="tf-icons bx bx-pencil"></span>
+                                                            </button> -->
+                                                            <a href="<?= BASE_URL ?>transaksi/hapus?id=<?= $item['id'] ?>" type="button" class="btn btn-icon me-2 btn-danger">
+                                                                <span class="tf-icons bx bx-trash"></span>
+                                                            </a>
+                                                        </span></td>
+                                                </tr>
+                                            <?php endwhile ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Content -->
+                        <!-- isi card -->
 
                         <!--/ Card layout -->
                     </div>
@@ -95,73 +124,17 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
     <?php require(VIEW_PATH . 'template/footer.php'); ?>
+
     <script>
         $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
+            $('#transaksiTable').DataTable({
+                "bFilter": false,
             });
-            loadBookingTable();
             // $('.paginate_button.current').addClass('btn btn-primary')
             // $('.paginate_button.previous.disabled').addClass('btn btn-default')
             // $('.paginate_button.next.disabled').addClass('btn btn-default')
         })
-
-        function loadBookingTable() {
-            var url = "<?= BASE_URL ?>api/booking";
-            $('#bookingTable').DataTable({
-                "language": {
-                    "emptyTable": "Reservasi kosong",
-                },
-                searching: false,
-                destroy: true,
-                "ordering": false,
-                ajax: url,
-                columns: [{
-                        data: null,
-                        render: function(data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    {
-                        data: 'id',
-                        name: 'id',
-                        visible: false
-                    },
-                    {
-                        data: 'costumer_name',
-                        name: 'costumer_name'
-                    },
-                    {
-                        data: 'plate_number',
-                        name: 'plate_number'
-                    },
-                    {
-                        data: 'merk_model',
-                        name: 'merk_model'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'total',
-                        name: 'total'
-                    },
-                    {
-                        data: 'time',
-                        name: 'time'
-                    },
-                    {
-                        data: 'date',
-                        name: 'date'
-                    },
-                ],
-            });
-        }
     </script>
 </body>
 
