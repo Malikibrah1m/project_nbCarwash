@@ -16,4 +16,12 @@ class TransaksiController extends BaseController
 
         return $this->view('admin.transaksi', ['transaksi' => $data]);
     }
+    public function getHapus()
+    {
+        $id = $this->get('id');
+        $this->model->rawQuery("DELETE FROM `transactions` WHERE id = '$id'");
+
+
+        // $this->model->rawQuery("DELETE FROM transactions WHERE id = '$id'");
+    }
 }
