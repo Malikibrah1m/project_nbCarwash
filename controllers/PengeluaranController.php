@@ -44,8 +44,6 @@ class PengeluaranController extends BaseController
             while ($row = $pengeluaran->fetch_assoc()) {
                 $data[] = $row;
             }
-        } else {
-            echo "0 results";
         }
         // print_r($data);
         echo json_encode(array('data' => $data));

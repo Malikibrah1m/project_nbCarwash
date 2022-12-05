@@ -12,4 +12,4 @@ while ($row = mysqli_fetch_assoc($user->get())) {
         break;
     }
 }
-$baseC->succesResponse($data);
+$baseC->successResponse($data);
