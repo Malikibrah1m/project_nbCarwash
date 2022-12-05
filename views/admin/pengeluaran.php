@@ -92,11 +92,12 @@
                                                         <input class="datepicker-here form-control digits" name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
                                                     </div>
                                                 </div>
-                                            </form>
+                                            
                                         </div>
                                         <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">Simpan <span id="loading" role="status"></span></button>
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                        </form>    
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                                 Close
                                             </button>
                                         </div>
@@ -209,7 +210,7 @@
                         data: 'aksi',
                         name: 'aksi',
                         render: function(data, type, row) {
-                            return '<button onclick="hapus(' + row.id + ')" class="btn btn-danger">Hapus</button>';
+                            return '<button onclick="hapus(' + row.id + ')" class="btn btn-icon me-2 btn-danger"><span class="tf-icons bx bx-trash"></span></button>';
                         }
                     }
                 ],
@@ -288,8 +289,9 @@
                 data: formData,
                 cache: false,
                 contentType: false,
-                processData: false,
+                processData: false, 
                 success: (data) => {
+                    $('#pengeluaran').modal('hide');
                     loadPengeluaranTable();
                     swal("Success", "Data berhasil dimasukkan", "success");
                     // $("#btn-save").html('Submit');
