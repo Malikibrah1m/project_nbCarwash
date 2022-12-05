@@ -131,6 +131,9 @@
             $('#transaksiTable').DataTable({
                 "bFilter": false,
             });
+            // $('.paginate_button.current').addClass('btn btn-primary')
+            // $('.paginate_button.previous.disabled').addClass('btn btn-default')
+            // $('.paginate_button.next.disabled').addClass('btn btn-default')
         })
     </script>
 </body>

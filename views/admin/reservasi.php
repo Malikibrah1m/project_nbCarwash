@@ -98,13 +98,16 @@
 
     <?php require(VIEW_PATH . 'template/footer.php'); ?>
     <script>
-        $(function() {
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
             });
             loadBookingTable();
+            // $('.paginate_button.current').addClass('btn btn-primary')
+            // $('.paginate_button.previous.disabled').addClass('btn btn-default')
+            // $('.paginate_button.next.disabled').addClass('btn btn-default')
         })
 
         function loadBookingTable() {

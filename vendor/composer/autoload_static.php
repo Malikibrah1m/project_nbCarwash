@@ -218,6 +218,7 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'BookingController' => __DIR__ . '/../..' . '/controllers/BookingController.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DetailPencucian' => __DIR__ . '/../..' . '/models/DetailPencucian.php',
+        'Employee' => __DIR__ . '/../..' . '/models/Employee.php',
         'IndexController' => __DIR__ . '/../..' . '/controllers/IndexController.php',
         'KeuntunganController' => __DIR__ . '/../..' . '/controllers/KeuntunganController.php',
         'Koneksi' => __DIR__ . '/../..' . '/traits/Koneksi.php',

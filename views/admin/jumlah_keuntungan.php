@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST" id="insertScheduleForm">
-                                                <input type="hidden" name="date" data-date="dateInput">
+                                                <input type="hidden" name="date" id="dateInput" data-date="dateInput">
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="daytime" class="form-label">Waktu</label>
@@ -242,6 +242,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
             });
+            $('#btnTotalFee').attr('disabled', true);
             $('#date').evoCalendar({
                 sidebarToggler: true,
                 sidebarDisplayDefault: true,
@@ -255,32 +256,46 @@
             $('#date').on('selectDate', function(a, b) {
                 var selectedDate = a.target.evoCalendar.$active.date;
                 var url = "<?= BASE_URL ?>keuntungan/selected_date?date=:date";
+                $('#selectedScheduleDate').text(selectedDate)
+                $('[data-date="dateInput"]').val(selectedDate)
+
                 $.ajax({
                     type: 'GET',
                     url: url.replace(':date', selectedDate),
                     success: function(res, textStatus, xhr) {
-                        console.log(res);
+                        // console.log(res);
+                        $('#totalFee tbody').empty();
+                        loadFeeTable(selectedDate);
                         $('#selectedScheduleDate').text(selectedDate);
-                        // loadProfitTable(selectedDate);
+                        loadProfitTable(selectedDate);
                         $('[data-date="dateInput"]').val(selectedDate);
-                        $('#btnTotalFee').attr('disabled', false);
-                        // loadFeeTable(selectedDate);
+                        if ($('#totalFee tr').length == 0) {
+                            $('#btnTotalFee').attr('disabled', true);
+                        }
+                        // $('#btnTotalFee').attr('disabled', false);
+                        
                     },
                     error: function(res, xhr) {
+                        $('#totalFee tbody').empty();
                         // var table = $('#profitTable').DataTable();
                         // table.destroy();
                         // var totalFee = $('#totalFee').DataTable();
                         // totalFee.destroy();
+                        loadFeeTable(selectedDate);
                         loadProfitTable(selectedDate);
+
                         // $('#totalFee tbody').empty();
                         $('#profitDetail').modal('show');
-                        $('#btnTotalFee').attr('disabled', true);
+                        $('#btnTotalFee').attr('disabled', false);
                         $('#selectedDate').text(selectedDate);
+                        if ($('#totalFee tr').length == 0) {
+                            $('#btnTotalFee').attr('disabled', true);
+                        }
                         $('#insertProfit').submit(function(e) {
                             e.preventDefault();
                             var formData = new FormData(this);
                             var insertUrl =
-                                "<?=BASE_URL?>keuntungan/insert?date=:date";
+                                "<?= BASE_URL ?>keuntungan/insert?date=:date";
                             $.ajax({
                                 url: insertUrl.replace(':date', selectedDate),
                                 type: 'POST',
@@ -298,8 +313,9 @@
                                     // $("#btn-save"). attr("disabled", false);
                                 },
                                 error: function(data) {
+                                    ;
                                     swal("Gagal",
-                                        "Data telah ada, mohon cek terlebih dahulu",
+                                        "Data di sesi tersebut sudah terdata",
                                         "error");
                                 }
                             });
@@ -309,6 +325,37 @@
                 // console.log(a.target.evoCalendar.$active.date);
             })
         })
+
+        $('#insertScheduleForm').submit(
+            function(e) {
+                e.preventDefault();
+                var url = "<?= BASE_URL ?>keuntungan/insert_karyawan";
+                var formData = new FormData(this);
+                var selectedDate = $('#dateInput').val();
+                console.log(selectedDate);
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        $('#insertSchedule').modal('hide');
+                        loadFeeTable(selectedDate);
+                        swal("Success", "Jadwal berhasil dimasukkan", "success");
+                        // $("#btn-save").html('Submit');
+                        // $("#btn-save"). attr("disabled", false);
+                    },
+                    error: function(data) {
+                        swal("Gagal", "Data telah ada", "error");
+                    }
+                })
+            }
+        )
 
         function loadProfitTable(date) {
             $('#user_id').select2({
@@ -404,6 +451,98 @@
             })
         }
 
+        function loadFeeTable(date) {
+            var url = "<?= BASE_URL ?>keuntungan/data_profit?date=:date";
+            $('#totalFee').DataTable({
+                "bInfo": false,
+                searching: false,
+                paging: false,
+                destroy: true,
+                "ordering": false,
+                serverSide: true,
+                ajax: url.replace(':date', date),
+                columns: [{
+                        data: null,
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'time',
+                        name: 'time'
+                    },
+                    {
+                        data: 'total_fee',
+                        name: 'total_fee'
+                    },
+                ],
+                footerCallback: function(row, data, start, end, display) {
+                    var api = this.api();
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ?
+                            i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column(4)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(4, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(1).footer()).html('Rp. ' + total);
+                },
+
+            })
+        }
+
+        $('#countFee').submit(function(e) {
+        e.preventDefault();
+        var selectedDate = $('#dateInput').val();
+        var formData = new FormData(this);
+        $.ajax({
+            url: "<?= BASE_URL ?>keuntungan/total_fee",
+            type: 'POST',
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: (data) => {
+                loadFeeTable(selectedDate);
+                // swal("Success", "Jadwal berhasil dimasukkan", "success");
+                // $("#btn-save").html('Submit');
+                // $("#btn-save"). attr("disabled", false);
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        })
+    })
     </script>
 </body>
 
