@@ -3,6 +3,12 @@
         'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
+<<<<<<< HEAD
+        'reference' => 'b18aff754cdeb9fca6dbe66fddee79b8bea41c81',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+=======
         'reference' => '00c6b3b427d6d17544743f86b5251770a0f2f89c',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
@@ -12,12 +18,19 @@
         'reference' => '9d774eda0b2eab10412ac9e2d439e47e2699b6c4',
         'name' => '__root__',
 >>>>>>> 1a9c8787c7d6a1e098ad4581f33f143b18c7813e
+>>>>>>> 1674f11e1b116ccb794b481e1149307228c6f748
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
+<<<<<<< HEAD
+            'reference' => 'b18aff754cdeb9fca6dbe66fddee79b8bea41c81',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+=======
             'reference' => '00c6b3b427d6d17544743f86b5251770a0f2f89c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
@@ -26,6 +39,7 @@
 =======
             'reference' => '9d774eda0b2eab10412ac9e2d439e47e2699b6c4',
 >>>>>>> 1a9c8787c7d6a1e098ad4581f33f143b18c7813e
+>>>>>>> 1674f11e1b116ccb794b481e1149307228c6f748
             'dev_requirement' => false,
         ),
         'doctrine/inflector' => array(

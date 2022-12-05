@@ -220,6 +220,7 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'DetailPencucian' => __DIR__ . '/../..' . '/models/DetailPencucian.php',
         'Employee' => __DIR__ . '/../..' . '/models/Employee.php',
         'IndexController' => __DIR__ . '/../..' . '/controllers/IndexController.php',
+        'KaryawanController' => __DIR__ . '/../..' . '/controllers/KaryawanController.php',
         'KeuntunganController' => __DIR__ . '/../..' . '/controllers/KeuntunganController.php',
         'Koneksi' => __DIR__ . '/../..' . '/traits/Koneksi.php',
         'LoginCheck' => __DIR__ . '/../..' . '/traits/Auth.php',

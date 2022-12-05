@@ -88,12 +88,18 @@
     </li>
 
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Master</span></li>
-    <li class="menu-item {{ Route::currentRouteName() == 'admin.employee.index' ? 'active' : ''}}">
+    <li class="menu-item <?=getActivePage('Karyawan')?>">
+        <a href="<?=BASE_URL?>Karyawan" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-user-check" type="solid"></i>
+          <div data-i18n="Analytics">Data Karyawan</div>
+        </a>
+      </li>
+      <!-- <li class="menu-item {{ Route::currentRouteName() == 'admin.employee.index' ? 'active' : ''}}">
       <a href="{{route('admin.employee.index')}}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-user-check" type="solid"></i>
         <div data-i18n="Analytics">Data Karyawan</div>
       </a>
-    </li>
+    </li> -->
 
     <li class="menu-item <?= getActivePage('rekap') ?>">
       <a href="<?= BASE_URL ?>rekap" class="menu-link">
