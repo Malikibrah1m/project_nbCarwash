@@ -90,11 +90,14 @@
                                                     <td><?= $item['time'] ?></td>
                                                     <td><?= $item['date'] ?></td>
                                                     <td><?= $item['total'] ?></td>
-                                                    <td><span><button type="button" class="btn btn-icon me-2 btn-primary">
+                                                    <td><span>
+                                                            <!-- <button type="button" class="btn btn-icon me-2 btn-primary">
                                                                 <span class="tf-icons bx bx-pencil"></span>
-                                                            </button> <button type="button" class="btn btn-icon me-2 btn-danger">
+                                                            </button> -->
+                                                            <a href="<?= BASE_URL ?>transaksi/hapus?id=<?= $item['id'] ?>" type="button" class="btn btn-icon me-2 btn-danger">
                                                                 <span class="tf-icons bx bx-trash"></span>
-                                                            </button></span></td>
+                                                            </a>
+                                                        </span></td>
                                                 </tr>
                                             <?php endwhile ?>
                                         </tbody>
