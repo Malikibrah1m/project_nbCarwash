@@ -12,16 +12,13 @@ class UserController extends BaseController
     public function getData_list()
     {
         header('Content-Type: application/json');
-        $user = $this->user->all();
+        $user = $this->user->where(array('role'=>'admin'),'!=')->get();
         $data = [];
         if ($user->num_rows > 0) {
             while ($row = $user->fetch_assoc()) {
                 $data[] = $row;
             }
-        } else {
-            echo "0 results";
         }
-        // print_r($data);
         echo json_encode($data);
     }
 }

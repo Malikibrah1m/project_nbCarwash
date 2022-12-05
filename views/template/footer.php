@@ -3,6 +3,7 @@
 <script src="<?= ASSET_PATH.'vendor/js/bootstrap.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/perfect-scrollbar/perfect-scrollbar.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/datatable/datatables/jquery.dataTables.min.js'?>"></script>
+<script src="<?= ASSET_PATH.'vendor/libs/datatable/datatables/dataTables.bootstrap5.min.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/select2/select2.full.min.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/sweet-alert/sweetalert.min.js'?>"></script>
 
