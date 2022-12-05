@@ -1,18 +1,23 @@
 <?php
-require_once 'vendor/autoload.php';
-define('APP_PATH', './');
-define('BASE_URL', 'http://localhost/project_nbCarwash/');
 
+use Laravolt\Avatar\Avatar;
+
+require_once 'vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+define('APP_PATH', './');
+define('BASE_URL', $_ENV['URL_PATH']);
 define('CONTROLLER_PATH', APP_PATH . 'controllers/');
 define('VIEW_PATH', APP_PATH . 'views/');
 define('API_CONTROLLER_PATH', APP_PATH . 'controllers/api/');
 define('MODELS_PATH', APP_PATH . 'models/');
 define('TRAIT_PATH', APP_PATH . 'traits/');
-define('ASSET_PATH',APP_PATH.'assets/');
+define('ASSET_PATH', APP_PATH . 'assets/');
 define('URL_PATH', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 
-error_reporting(E_ALL);
+error_reporting(E_ERROR);
 ini_set('display_errors', 'On');
+
 
 
 /**
@@ -33,16 +38,16 @@ ini_set('display_errors', 'On');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
-// var_dump($uri);
+// print_r($uri[2]);
 if (strtolower($uri[2]) == "api") {
-    $class = ucfirst($uri[4]);
+    $class = ucfirst($uri[3]);
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-    $targetClass = $class . 'Controller';
+    $targetClass = $class . 'APIController';
     $controller = new $targetClass();
-    if (empty($uri[6])) {
+    if (empty($uri[4])) {
         $strMethodName = $requestMethod . 'Index';
-    }else{
-        $strMethodName = $requestMethod . ucfirst($uri[5]);
+    } else {
+        $strMethodName = $requestMethod . ucfirst($uri[4]);
     }
     $controller->$strMethodName();
 } else {
@@ -54,14 +59,29 @@ if (strtolower($uri[2]) == "api") {
         $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
         $targetClass = $class . 'Controller';
         $controller = new $targetClass();
-        
-        if (empty($uri[3])) {
+        if (empty($uri[3]) || $uri[3] == ' ') {
             $strMethodName = $requestMethod . 'Index';
-        }else{
+        } else {
             $strMethodName = $requestMethod . ucfirst($uri[3]);
-            // var_dump($strMethodName);
+            // echo $strMethodName;
         }
         $controller->$strMethodName();
-        // var_dump($controller->$strMethodName);
     }
+}
+
+
+function avatar($nama)
+{
+    $avatar = new Avatar();
+    return $avatar->create($nama)->setBackground('#696CFF');
+}
+
+function getActivePage($nama_page)
+{
+    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $uri = explode('/', $uri);
+    if ($uri[2] == $nama_page) {
+        return "active";
+    }
+    return "";
 }
