@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 05 Des 2022 pada 14.26
--- Versi server: 10.5.12-MariaDB-0+deb11u1
--- Versi PHP: 8.1.12
+-- Generation Time: Dec 09, 2022 at 12:27 AM
+-- Server version: 10.5.12-MariaDB-0+deb11u1
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bookings`
+-- Table structure for table `bookings`
 --
 
 CREATE TABLE `bookings` (
@@ -39,11 +39,11 @@ CREATE TABLE `bookings` (
   `total` int(7) NOT NULL,
   `date` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `bookings`
+-- Dumping data for table `bookings`
 --
 
 INSERT INTO `bookings` (`id`, `name`, `no_hp`, `is_valid`, `plate_number`, `merk_model`, `wash_type_id`, `time`, `total`, `date`, `created_at`, `updated_at`) VALUES
@@ -53,7 +53,7 @@ INSERT INTO `bookings` (`id`, `name`, `no_hp`, `is_valid`, `plate_number`, `merk
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `employees`
+-- Table structure for table `employees`
 --
 
 CREATE TABLE `employees` (
@@ -63,11 +63,11 @@ CREATE TABLE `employees` (
   `total_fee` int(7) DEFAULT NULL,
   `time` enum('Sesi 1','Sesi 2','Sesi 3','Sesi 4','Sesi 5') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `employees`
+-- Dumping data for table `employees`
 --
 
 INSERT INTO `employees` (`id`, `user_id`, `date`, `total_fee`, `time`, `created_at`, `updated_at`) VALUES
@@ -79,7 +79,7 @@ INSERT INTO `employees` (`id`, `user_id`, `date`, `total_fee`, `time`, `created_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `profits`
+-- Table structure for table `profits`
 --
 
 CREATE TABLE `profits` (
@@ -91,11 +91,11 @@ CREATE TABLE `profits` (
   `for_cash` int(7) NOT NULL COMMENT 'Uang untuk kas',
   `for_owner` int(7) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `profits`
+-- Dumping data for table `profits`
 --
 
 INSERT INTO `profits` (`id`, `date`, `total`, `daytime`, `for_employee`, `for_cash`, `for_owner`, `created_at`, `updated_at`) VALUES
@@ -105,7 +105,7 @@ INSERT INTO `profits` (`id`, `date`, `total`, `daytime`, `for_employee`, `for_ca
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `spends`
+-- Table structure for table `spends`
 --
 
 CREATE TABLE `spends` (
@@ -114,21 +114,22 @@ CREATE TABLE `spends` (
   `date` date NOT NULL,
   `total` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `spends`
+-- Dumping data for table `spends`
 --
 
 INSERT INTO `spends` (`id`, `keterangan`, `date`, `total`, `created_at`, `updated_at`) VALUES
 (4, 'jghjg', '2022-04-12', 20000, '2022-12-05 07:04:37', '0000-00-00 00:00:00'),
-(5, 'jjasdsa', '2022-12-05', 12000, '2022-12-05 07:11:16', '0000-00-00 00:00:00');
+(5, 'jjasdsa', '2022-12-05', 12000, '2022-12-05 07:11:16', '0000-00-00 00:00:00'),
+(7, 'sadas', '2022-12-07', 10000, '2022-12-07 06:21:10', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transactions`
+-- Table structure for table `transactions`
 --
 
 CREATE TABLE `transactions` (
@@ -144,11 +145,11 @@ CREATE TABLE `transactions` (
   `date` date NOT NULL,
   `note` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `transactions`
+-- Dumping data for table `transactions`
 --
 
 INSERT INTO `transactions` (`id`, `name`, `is_done`, `plate_number`, `no_hp`, `merk_model`, `wash_type_id`, `time`, `total`, `date`, `note`, `created_at`, `updated_at`) VALUES
@@ -162,7 +163,7 @@ INSERT INTO `transactions` (`id`, `name`, `is_done`, `plate_number`, `no_hp`, `m
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -179,7 +180,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `role`, `is_active`, `password`, `change_password`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -191,7 +192,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `role`, `is_active`, `password`, `ch
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `wash_types`
+-- Table structure for table `wash_types`
 --
 
 CREATE TABLE `wash_types` (
@@ -204,7 +205,7 @@ CREATE TABLE `wash_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `wash_types`
+-- Dumping data for table `wash_types`
 --
 
 INSERT INTO `wash_types` (`id`, `name`, `type`, `price`, `created_at`, `updated_at`) VALUES
@@ -219,91 +220,91 @@ INSERT INTO `wash_types` (`id`, `name`, `type`, `price`, `created_at`, `updated_
 --
 
 --
--- Indeks untuk tabel `bookings`
+-- Indexes for table `bookings`
 --
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wash_type_id` (`wash_type_id`);
 
 --
--- Indeks untuk tabel `employees`
+-- Indexes for table `employees`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `profits`
+-- Indexes for table `profits`
 --
 ALTER TABLE `profits`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `spends`
+-- Indexes for table `spends`
 --
 ALTER TABLE `spends`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transactions`
+-- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wash_type_id` (`wash_type_id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- Indeks untuk tabel `wash_types`
+-- Indexes for table `wash_types`
 --
 ALTER TABLE `wash_types`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `spends`
+-- AUTO_INCREMENT for table `spends`
 --
 ALTER TABLE `spends`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `wash_types`
+-- AUTO_INCREMENT for table `wash_types`
 --
 ALTER TABLE `wash_types`
   MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `bookings`
+-- Constraints for table `bookings`
 --
 ALTER TABLE `bookings`
   ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`wash_type_id`) REFERENCES `wash_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `employees`
+-- Constraints for table `employees`
 --
 ALTER TABLE `employees`
   ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `transactions`
+-- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
   ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`wash_type_id`) REFERENCES `wash_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
