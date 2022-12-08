@@ -9,6 +9,8 @@ class PencucianController extends BaseController
         $this->tipecuci = new DetailPencucian();
     }
 
+    
+
     public function getDetail_pencucian()
     {
         header('Content-Type: application/json');
@@ -42,4 +44,5 @@ class PencucianController extends BaseController
         // print_r($data);
         echo json_encode($data);
     }
+
 }

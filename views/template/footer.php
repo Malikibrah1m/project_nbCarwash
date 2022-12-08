@@ -1,6 +1,8 @@
 <script src="<?= ASSET_PATH.'vendor/libs/jquery/jquery.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/popper/popper.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/js/bootstrap.js'?>"></script>
+<script src="<?= ASSET_PATH.'vendor/libs/jquery/validate/jquery.validate.js'?>"></script>
+<script src="<?= ASSET_PATH.'vendor/libs/jquery/validate/localization/messages_id.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/perfect-scrollbar/perfect-scrollbar.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/datatable/datatables/jquery.dataTables.min.js'?>"></script>
 <script src="<?= ASSET_PATH.'vendor/libs/datatable/datatables/dataTables.bootstrap5.min.js'?>"></script>
