@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 
 class BookingAPIController extends ApiController
 {
@@ -13,7 +14,8 @@ class BookingAPIController extends ApiController
 
     public function getIndex()
     {
-        $listData = $this->booking->rawQuery("SELECT bookings.id,bookings.name AS costumer_name,no_hp,plate_number,merk_model,wash_types.name,time,total,date FROM `bookings` JOIN wash_types on wash_type_id = wash_types.id")->get();
+        $date = Carbon::now()->format('Y-m-d');
+        $listData = $this->booking->rawQuery("SELECT bookings.id,bookings.name AS costumer_name,no_hp,plate_number,merk_model,wash_types.name,time,total,date FROM `bookings` JOIN wash_types on wash_type_id = wash_types.id where date = '$date'")->get();
         $data = [];
         if ($listData->num_rows > 0) {
             while ($row = $listData->fetch_assoc()) {
@@ -43,7 +45,7 @@ class BookingAPIController extends ApiController
         $sqlInsert = "INSERT INTO 
         `transactions`(`id`, `name`, `plate_number`, `no_hp`, `merk_model`, `wash_type_id`, `time`, `total`, `date`, `note`, `created_at`, `updated_at`) 
         VALUES ('$id','$data[0]['name']','$data[0]['id']','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]','[value-13]')";
-        $trans = new Transaction();
+        $trans = new Transaksi();
         // $trans->rawQuery();
         echo json_encode(array('data' => $data[0]['id']));
     }
