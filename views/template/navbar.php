@@ -21,7 +21,7 @@
                 </div>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <div class="dropdown-divider"></div>
         </li>
         <li>
@@ -32,7 +32,7 @@
 
                 </span>
             </a>
-        </li>
+        </li> -->
 
         <li>
             <div class="dropdown-divider"></div>
