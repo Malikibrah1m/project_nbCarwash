@@ -52,33 +52,92 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Karyawan </h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Karyawan</h4>
+                    <!-- Large Modal -->
+                    <div class="modal fade" id="pengeluaran" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel3">Tambah Daftar Karyawan</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-md-12" id="showAlert">
+
+                                            </div>
+
+                                            <form method="POST" id="spendInsertForm">
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="keterangan" class="form-label">Nama</label>
+                                                        <textarea class="form-control" name="keterangan" id="keterangan" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="total" class="form-label">Email</label>
+                                                        <input type="text" id="total" name="total" class="form-control" />
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="user_id" class="form-label">Password</label>
+                                                        <select class="form-select" name="user_id" id="user_id" style="width: 100%">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                         <!-- Content -->
                         <div class="card">
-                            <h5 class="card-header">Data Karyawan</h5>
+                        <h5 class="card-header">Data Karyawan</h5>
+                            <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
+                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pengeluaran">
+                                    Tambah Data
+                                </button>
+                            </div>
+                            
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
-
-                                <div class="col-md-5" style=" padding-bottom: 2rem;">
-                                    <button class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#insertSchedule">Tambah Data </button>
-
-                                    <table class="table" id="bookingTable">
+                                    <table class="table" id="rekapTable">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
                                                 <th>ID</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
                                                 <th>Password</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
+                        
 
                         <!--/ Card layout -->
                     </div>
@@ -104,59 +163,74 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
             });
-            loadBookingTable();
+            loadrekapTable();
         })
 
-        function loadBookingTable() {
-            var url = "<?= BASE_URL ?>api/booking";
-            $('#bookingTable').DataTable({
-                "language": {
-                    "emptyTable": "Reservasi kosong",
-                },
-                searching: false,
+        function loadrekapTable() {
+            var url = "<?= BASE_URL ?>rekap/rekap_data";
+            $('#rekapTable').DataTable({
+                searching: true,
+                paging: true,
                 destroy: true,
                 "ordering": false,
+                // serverSide: true,
                 ajax: url,
                 columns: [{
-                        data: null,
-                        render: function(data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    {
-                        data: 'id',
-                        name: 'id',
-                        visible: false
-                    },
-                    {
-                        data: 'costumer_name',
-                        name: 'costumer_name'
-                    },
-                    {
-                        data: 'plate_number',
-                        name: 'plate_number'
-                    },
-                    {
-                        data: 'merk_model',
-                        name: 'merk_model'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
+                        data: 'date',
+                        name: 'date'
                     },
                     {
                         data: 'total',
                         name: 'total'
                     },
                     {
-                        data: 'time',
-                        name: 'time'
+                        data: 'daytime',
+                        name: 'daytime'
                     },
                     {
-                        data: 'date',
-                        name: 'date'
+                        data: 'for_cash',
+                        name: 'for_cash'
+                    },
+                    {
+                        data: 'for_employee',
+                        name: 'for_employee'
+                    },
+                    {
+                        data: 'for_owner',
+                        name: 'for_owner'
                     },
                 ],
+                footerCallback: function(row, data, start, end, display) {
+                    var api = this.api();
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ?
+                            i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column(1)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(1, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(1).footer()).html('Rp. ' + total);
+                },
+
             });
         }
     </script>
