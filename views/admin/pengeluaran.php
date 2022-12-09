@@ -92,12 +92,12 @@
                                                         <input class="datepicker-here form-control digits" name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
                                                     </div>
                                                 </div>
-                                            
+
                                         </div>
                                         <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Simpan <span id="loading" role="status"></span></button>
-                                        </form>    
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                            <button type="submit" class="btn btn-primary">Simpan <span id="loading" role="status"></span></button>
+                                            </form>
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                                 Close
                                             </button>
                                         </div>
@@ -261,7 +261,7 @@
                 // console.log(willDelete);
                 if (willDelete) {
                     $.ajax({
-                        url: url.replace(':id',data),
+                        url: url.replace(':id', data),
                         type: 'DELETE',
                         cache: false,
                         processData: false,
@@ -289,7 +289,7 @@
                 data: formData,
                 cache: false,
                 contentType: false,
-                processData: false, 
+                processData: false,
                 success: (data) => {
                     $('#pengeluaran').modal('hide');
                     loadPengeluaranTable();
