@@ -20,15 +20,35 @@
     <div style="width:800px; margin:0 auto; padding-top: 2rem;">
         <div class="card">
             <div class="card-body">
-                <div class="text-center">
-                    <h3>Daftar Antrian</h3>
-                    <h2 id="antrian"><?php print_r($data['status'][0]) ?></h2>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h3>Daftar Antrian</h3>
+                            <h2 id="antrian"><?php print_r($data['statusBook'][0]) ?></h2>
+                        </div>
+
+                        <div class="col-md-2">
+                            <h3>Dalam Proses</h3>
+                            <h2 id="antrian"><?php print_r($data['statusWait'][0]) ?></h2>
+                        </div>
+                    </div>
                 </div>
-                <form action="" method="POST">
+                <?php if ($_GET['error'] == 'true') { ?>
+                    <div class="alert alert-danger" role="alert">
+                        Ooops Ada yang salah...
+                    </div>
+                <?php } ?>
+                <form action="<?= BASE_URL ?>booking/insert" method="POST">
                     <div class="row">
                         <div class="col mb-3">
                             <label for="name" class="form-label">Nama Pemilik</label>
                             <input type="text" required id="name" name="name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="no_hp" class="form-label">Nomor HP</label>
+                            <input type="text" required id="no_hp" name="no_hp" class="form-control" />
                         </div>
                     </div>
                     <div class="row">
@@ -95,7 +115,7 @@
         var wash_type = $('#wash_type').find(":selected").val();
         console.log(wash_type);
         var url = "<?= BASE_URL ?>pencucian/detail_pencucian?type=:id";
-        var finalUrl = url.replace(':id',wash_type);
+        var finalUrl = url.replace(':id', wash_type);
         $.ajax({
             dataType: 'json',
             delay: 250,

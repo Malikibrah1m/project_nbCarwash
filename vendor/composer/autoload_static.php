@@ -115,8 +115,8 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -235,7 +235,7 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'ReservasiController' => __DIR__ . '/../..' . '/controllers/ReservasiController.php',
         'Spend' => __DIR__ . '/../..' . '/models/Spend.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
-        'Transaction' => __DIR__ . '/../..' . '/models/Transaction.php',
+        'TarifController' => __DIR__ . '/../..' . '/controllers/TarifController.php',
         'Transaksi' => __DIR__ . '/../..' . '/models/Transaksi.php',
         'TransaksiController' => __DIR__ . '/../..' . '/controllers/TransaksiController.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
