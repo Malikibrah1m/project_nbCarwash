@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 09, 2022 at 12:27 AM
+-- Generation Time: Dec 09, 2022 at 09:18 AM
 -- Server version: 10.5.12-MariaDB-0+deb11u1
 -- PHP Version: 8.1.12
 
@@ -31,7 +31,8 @@ CREATE TABLE `bookings` (
   `id` varchar(60) NOT NULL,
   `name` varchar(100) NOT NULL,
   `no_hp` varchar(14) NOT NULL,
-  `is_valid` enum('true','false') NOT NULL DEFAULT 'false',
+  `is_valid` enum('true','false') NOT NULL DEFAULT 'false' COMMENT 'Kolom penentu apakah booking valid atau belum',
+  `is_done` enum('true','false') NOT NULL DEFAULT 'false' COMMENT 'Kolom penentu booking selesai apa belum',
   `plate_number` varchar(20) DEFAULT NULL,
   `merk_model` varchar(50) DEFAULT NULL,
   `wash_type_id` int(1) NOT NULL,
@@ -46,9 +47,10 @@ CREATE TABLE `bookings` (
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`id`, `name`, `no_hp`, `is_valid`, `plate_number`, `merk_model`, `wash_type_id`, `time`, `total`, `date`, `created_at`, `updated_at`) VALUES
-('135671', 'Adi', '', 'true', 'P09907RQ', 'Honda Vario', 2, '22:29:00', 20000, '2022-09-10', '2022-11-11 04:10:35', '0000-00-00 00:00:00'),
-('13567ss', 'ad', '', 'true', 'P09907RQ', 'Honda Vario', 5, '22:29:00', 20000, '2022-09-10', '2022-11-11 04:13:25', '0000-00-00 00:00:00');
+INSERT INTO `bookings` (`id`, `name`, `no_hp`, `is_valid`, `is_done`, `plate_number`, `merk_model`, `wash_type_id`, `time`, `total`, `date`, `created_at`, `updated_at`) VALUES
+('135671', 'Adi', '', 'true', 'false', 'P09907RQ', 'Honda Vario', 2, '22:29:00', 20000, '2022-09-10', '2022-11-11 04:10:35', '0000-00-00 00:00:00'),
+('2022-12-09-adi-0:46', 'Adi', '0990237024', 'false', 'false', 'R12308PL', 'Vario', 1, '00:46:00', 16000, '2022-12-09', '2022-12-08 17:46:44', NULL),
+('2022-12-09-adi-1:01', 'Adi', '0990237024', 'false', 'false', 'R12308PL', 'Vario', 1, '01:01:00', 16000, '2022-12-09', '2022-12-08 17:59:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -155,10 +157,7 @@ CREATE TABLE `transactions` (
 INSERT INTO `transactions` (`id`, `name`, `is_done`, `plate_number`, `no_hp`, `merk_model`, `wash_type_id`, `time`, `total`, `date`, `note`, `created_at`, `updated_at`) VALUES
 ('2022-10-26-adi_saputro-22:22', 'Adi Saputro', 'false', 'P0797RT', '', 'Honda Beat', 1, '12:10:00', 16000, '2022-11-07', '', '2022-10-26 15:22:02', '2022-10-26 15:22:02'),
 ('2022-11-04-malik-09:24', 'Malik', 'false', 'N YAS', '', 'Honda Revo', 1, '09:30:00', 16000, '2022-11-07', '', '2022-11-04 02:24:36', '2022-11-04 02:24:36'),
-('2022-11-12-aaa-00:10', 'AAA', 'false', 'P1111', '', 'Honda Revo', 1, '00:10:00', 16000, '2022-11-12', '', '2022-11-11 17:10:35', '2022-11-11 17:10:35'),
-('2022-11-12-adi-14:34', 'Adi', 'false', NULL, '085748314069', NULL, 5, '15:34:00', 10000, '2022-11-27', 'Karpet 1', '2022-11-12 07:34:07', '2022-11-12 07:34:07'),
-('2022-11-12-adi-14:36', 'Adi', 'false', NULL, '085748314069', NULL, 5, '14:36:00', 25000, '2022-11-27', 'Karpet 2', '2022-11-12 07:36:32', '2022-11-12 07:36:32'),
-('2022-11-12-xxxx-14:34', 'Xxxx', 'false', NULL, '085748314069', NULL, 5, '14:34:00', 10000, '2022-11-27', 'Karpet 2', '2022-11-12 07:34:55', '2022-11-12 07:34:55');
+('2022-11-12-aaa-00:10', 'AAA', 'false', 'P1111', '', 'Honda Revo', 1, '00:10:00', 16000, '2022-11-12', '', '2022-11-11 17:10:35', '2022-11-11 17:10:35');
 
 -- --------------------------------------------------------
 
@@ -198,7 +197,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `role`, `is_active`, `password`, `ch
 CREATE TABLE `wash_types` (
   `id` int(1) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `type` enum('Motor','Mobil','Karpet') NOT NULL,
+  `type` enum('Motor','Mobil') NOT NULL,
   `price` int(5) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
@@ -212,8 +211,7 @@ INSERT INTO `wash_types` (`id`, `name`, `type`, `price`, `created_at`, `updated_
 (1, 'Cuci Motor', 'Motor', 16000, '2022-09-10 14:23:07', '2022-09-11 14:25:04'),
 (2, 'Cuci Express Mobil', 'Mobil', 25000, '2022-09-10 14:23:07', NULL),
 (3, 'Cuci Standard Mobil', 'Mobil', 30000, '2022-09-10 14:24:03', NULL),
-(4, 'Cuci Premium Mobil', 'Mobil', 40000, '2022-09-10 14:24:03', NULL),
-(5, 'Cuci Karpet', 'Karpet', 10000, '2022-09-10 14:24:16', NULL);
+(4, 'Cuci Premium Mobil', 'Mobil', 40000, '2022-09-10 14:24:03', NULL);
 
 --
 -- Indexes for dumped tables
