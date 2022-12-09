@@ -77,19 +77,19 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="keterangan" class="form-label">Keterangan</label>
-                                                        <textarea class="form-control" name="keterangan" id="keterangan" rows="3"></textarea>
+                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="3"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="total" class="form-label">Total</label>
-                                                        <input type="text" id="total" name="total" class="form-control" />
+                                                        <input type="number" id="total" required name="total" class="form-control digits" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="dayte" class="form-label">Tanggal</label>
-                                                        <input class="datepicker-here form-control digits" name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
+                                                        <input class="datepicker-here form-control" required name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
                                                     </div>
                                                 </div>
 
@@ -165,6 +165,38 @@
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+
+            });
+            $('#spendInsertForm').validate({
+                // wrapper: "#form-input",
+                rules: {
+                    keterangan: {
+                        required: true,
+                    },
+                    total: {
+                        required: true,
+                        number: true,
+                    },
+                    daterange: {
+                        required: true,
+                        date: true,
+                    },
+
+
+                },
+                errorElement: "span",
+                errorPlacement: function(error, element) {
+                    error.addClass("invalid-feedback");
+                    // error.appendTo("#form-input");
+                    error.insertAfter(element);
+                    // Add the `help-block` class to the error element
+
+                    // if (element.prop("type") === "checkbox") {
+                    //     error.insertAfter(element.parent("label"));
+                    // } else {
+                    //     error.insertAfter(element);
+                    // }
                 },
             });
             loadPengeluaranTable();
@@ -281,26 +313,31 @@
         }
 
         $('#spendInsertForm').submit(function(e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "<?= BASE_URL ?>pengeluaran/insert",
-                type: 'POST',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: (data) => {
-                    $('#pengeluaran').modal('hide');
-                    loadPengeluaranTable();
-                    swal("Success", "Data berhasil dimasukkan", "success");
-                    // $("#btn-save").html('Submit');
-                    // $("#btn-save"). attr("disabled", false);
-                },
-                error: function(data) {
-                    swal("Gagal", "Data telah ada", "error");
-                }
-            })
+            var form = $('#spendInsertForm');
+            if (form.valid()) {
+                console.log(form.valid());
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: "<?= BASE_URL ?>pengeluaran/insert",
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        $('#pengeluaran').modal('hide');
+                        loadPengeluaranTable();
+                        swal("Success", "Data berhasil dimasukkan", "success");
+                        // $("#btn-save").html('Submit');
+                        // $("#btn-save"). attr("disabled", false);
+                    },
+                    error: function(data) {
+                        swal("Gagal", "Data telah ada", "error");
+                    }
+                })
+            }
+
         })
     </script>
 </body>

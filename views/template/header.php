@@ -1,7 +1,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+<!-- <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" /> -->
 <link rel="icon" type="image/x-icon" href="<?= ASSET_PATH . '/img/favicon/favicon.ico' ?>" />
 
 <!-- Icons. Uncomment required icon fonts -->
@@ -24,7 +24,6 @@
 <link rel="stylesheet" href="<?= ASSET_PATH . '/vendor/libs/datepicker/date-picker.css' ?>">
 <link rel="stylesheet" href="<?= ASSET_PATH . '/vendor/libs/datepicker/daterange-picker.css' ?>">
 <!-- Page CSS --> 
-
 <!-- Helpers -->
 <script src="<?= ASSET_PATH . '/vendor/js/helpers.js' ?>"></script>
 
@@ -32,6 +31,10 @@
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="<?= ASSET_PATH . '/js/config.js' ?>"></script>
 <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+    body{
+        font-family: 'Poppins',sans-serif;
+    }
     /* .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current{
         background: var(--bs-blue) ;
         color: white;
