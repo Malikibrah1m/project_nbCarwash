@@ -74,7 +74,7 @@
       </a>
     </li>
     <li class="menu-item {{ Route::currentRouteName() == 'admin.rate.index' ? 'active' : ''}}">
-      <a href="{{route('admin.rate.index')}}" class="menu-link">
+      <a href="<?= BASE_URL ?>tarif" class="menu-link">
         <i class="menu-icon tf-icons bx bx-food-menu"></i>
         <div data-i18n="Analytics">Tarif</div>
       </a>

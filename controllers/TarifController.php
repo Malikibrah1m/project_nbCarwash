@@ -11,6 +11,6 @@ class TarifController extends BaseController{
 
     public function getIndex()
     {
-        return $this->view('admin, tarif');
+        return $this->view('admin.tarif');
     }
 }
