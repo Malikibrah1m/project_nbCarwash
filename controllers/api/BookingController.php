@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 
 class BookingAPIController extends ApiController
 {
@@ -13,7 +14,8 @@ class BookingAPIController extends ApiController
 
     public function getIndex()
     {
-        $listData = $this->booking->rawQuery("SELECT bookings.id,bookings.name AS costumer_name,no_hp,plate_number,merk_model,wash_types.name,time,total,date FROM `bookings` JOIN wash_types on wash_type_id = wash_types.id")->get();
+        $date = Carbon::now()->format('Y-m-d');
+        $listData = $this->booking->rawQuery("SELECT bookings.id,bookings.name AS costumer_name,no_hp,plate_number,merk_model,wash_types.name,time,total,date FROM `bookings` JOIN wash_types on wash_type_id = wash_types.id where date = '$date'")->get();
         $data = [];
         if ($listData->num_rows > 0) {
             while ($row = $listData->fetch_assoc()) {
