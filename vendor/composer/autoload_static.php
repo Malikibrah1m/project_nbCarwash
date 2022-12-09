@@ -235,7 +235,6 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'ReservasiController' => __DIR__ . '/../..' . '/controllers/ReservasiController.php',
         'Spend' => __DIR__ . '/../..' . '/models/Spend.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
-        'Transaction' => __DIR__ . '/../..' . '/models/Transaction.php',
         'Transaksi' => __DIR__ . '/../..' . '/models/Transaksi.php',
         'TransaksiController' => __DIR__ . '/../..' . '/controllers/TransaksiController.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',

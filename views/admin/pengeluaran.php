@@ -166,7 +166,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
-                
+
             });
             $('#spendInsertForm').validate({
                 // wrapper: "#form-input",
@@ -176,11 +176,11 @@
                     },
                     total: {
                         required: true,
-                        number:true,
+                        number: true,
                     },
                     daterange: {
                         required: true,
-                        date:true,
+                        date: true,
                     },
 
 
@@ -191,7 +191,7 @@
                     // error.appendTo("#form-input");
                     error.insertAfter(element);
                     // Add the `help-block` class to the error element
-                   
+
                     // if (element.prop("type") === "checkbox") {
                     //     error.insertAfter(element.parent("label"));
                     // } else {

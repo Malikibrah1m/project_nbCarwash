@@ -45,7 +45,7 @@ class BookingAPIController extends ApiController
         $sqlInsert = "INSERT INTO 
         `transactions`(`id`, `name`, `plate_number`, `no_hp`, `merk_model`, `wash_type_id`, `time`, `total`, `date`, `note`, `created_at`, `updated_at`) 
         VALUES ('$id','$data[0]['name']','$data[0]['id']','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]','[value-13]')";
-        $trans = new Transaction();
+        $trans = new Transaksi();
         // $trans->rawQuery();
         echo json_encode(array('data' => $data[0]['id']));
     }

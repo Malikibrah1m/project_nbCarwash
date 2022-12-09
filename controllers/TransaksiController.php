@@ -2,12 +2,12 @@
 
 class TransaksiController extends BaseController
 {
-    private Transaction $model;
+    private Transaksi $model;
 
     public function __construct()
     {
         session_start();
-        $this->model = new Transaction();
+        $this->model = new Transaksi();
     }
 
     public function getIndex()

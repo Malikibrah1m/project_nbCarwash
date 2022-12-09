@@ -7,6 +7,10 @@
         'aliases' => array(),
         'reference' => 'c4ecb2921f9842baca59d70fd2713e0a17cee342',
         'name' => '__root__',
+        'reference' => 'f4b0a40049bc83c8aa359cc281491d67c168e73c',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
@@ -17,6 +21,10 @@
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'reference' => 'c4ecb2921f9842baca59d70fd2713e0a17cee342',
+            'reference' => 'f4b0a40049bc83c8aa359cc281491d67c168e73c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'doctrine/inflector' => array(

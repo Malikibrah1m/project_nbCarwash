@@ -27,8 +27,7 @@ class LoginController extends ApiController
                 );
                 return $this->succesResponse($data);
             } else {
-                http_response_code(401);
-                header("Location: " . BASE_URL . "?error=true&&message=Cek kembali email atau password anda");
+                return $this->errorResponse('Oopss');
             }
         }
         // return $this->succesResponse('Hello World');

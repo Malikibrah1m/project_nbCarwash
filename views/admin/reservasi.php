@@ -58,6 +58,7 @@
                             <h5 class="card-header">Data Reservasi</h5>
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
+                                    
                                     <table class="table" id="bookingTable">
                                         <thead>
                                             <tr>
