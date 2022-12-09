@@ -44,7 +44,6 @@
                                 <option value=""></option>
                                 <option value="Motor">Motor</option>
                                 <option value="Mobil">Mobil</option>
-                                <option value="Karpet">Karpet</option>
                             </select>
                         </div>
                     </div>
@@ -59,11 +58,11 @@
                     <div class="row g-2">
                         <div class="col mb-0">
                             <label for="merk_model" class="form-label">Merk Model</label>
-                            <input type="text" id="merk_model" name="merk_model" required class="form-control" placeholder="cth.Honda Vario" />
+                            <input type="text" id="merk_model" required name="merk_model" required class="form-control" placeholder="cth.Honda Vario" />
                         </div>
                         <div class="col mb-0">
                             <label for="plate_number" class="form-label">Plat Nomor</label>
-                            <input type="text" id="plate_number" name="plate_number" required class="form-control" />
+                            <input type="text" id="plate_number" required name="plate_number" required class="form-control" />
                         </div>
                     </div>
                     <div class="row">
@@ -122,9 +121,8 @@
                 delay: 250,
                 type: 'GET',
                 success: function(res) {
-
-                    console.log(res);
-                    // $('#total').val(res.price);
+                    // console.log(res[0].price);
+                    // $('#total').val(res[0].price);
                 },
                 processResults: function(data) {
                     return {
@@ -142,15 +140,13 @@
         })
     })
     $('#detailPencucian').on('select2:select', function(e) {
-        var url = "<?= BASE_URL ?>pencucian/detail_pencucian?type=:id";
+        var url = "<?= BASE_URL ?>pencucian/detail_harga?id=:id";
         var finalUrl = url.replace(':id', e.params.data.id);
         $.ajax({
             url: finalUrl,
             success: function(res) {
-                $('#total').val(res.price);
+                $('#total').val(res[0].price);
             }
         });
     })
 </script>
-
-</html>

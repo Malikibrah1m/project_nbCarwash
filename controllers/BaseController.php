@@ -3,6 +3,9 @@ class BaseController
 {
     use Request;
 
+    public function __construct() {
+        // session_start();
+    }
     public function view($template, $data = array())
     {
         // ob_start();

@@ -3,13 +3,8 @@
 // namespace traits\Request;
 trait Request
 {
-
-    public function input()
-    {
-        return $this;
-    }
     /**
-     * @param mixed $params 
+     * @param mixed $formName 
      * Get param dari url
      * 
      * ex. localhost/test?id=20
@@ -17,10 +12,10 @@ trait Request
      * akan memunculkan 20
      * @return string
      */
-    public function get($params)
+    public function get($formName)
     {
 
-        return $_GET[$params];
+        return $_GET[$formName];
     }
 
 
