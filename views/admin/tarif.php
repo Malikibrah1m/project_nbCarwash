@@ -52,14 +52,64 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif </h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif</h4>
+                    <!-- Large Modal -->
+                     <div class="modal fade" id="pengeluaran" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel3">Tambah Pengeluaran</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-md-12" id="showAlert">
+
+                                            </div>
+
+                                            <form method="POST" id="spendInsertForm">
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="keterangan" class="form-label">Keterangan</label>
+                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="total" class="form-label">Total</label>
+                                                        <input type="number" id="total" required name="total" class="form-control digits" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="dayte" class="form-label">Tanggal</label>
+                                                        <input class="datepicker-here form-control" required name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
+                                                    </div>
+                                                </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Simpan <span id="loading" role="status"></span></button>
+                                            </form>
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         <!-- Content -->
                         <div class="card">
-                            <h5 class="card-header">Data Tarif</h5>
+                        <h5 class="card-header">Data Tarif</h5>
+                            <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
+                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pengeluaran">
+                                    Export
+                                </button>
+                            </div>
+                            
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
-                                    
-                                    <table class="table" id="bookingTable">
+                                    <table class="table" id="rekapTable">
                                         <thead>
                                             <tr>
                                                 <th>Tanggal</th>
@@ -73,10 +123,21 @@
                                         <tbody>
 
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
+                        
 
                         <!--/ Card layout -->
                     </div>
@@ -94,8 +155,55 @@
     </div>
     <!-- / Layout wrapper -->
 
-   
+    <?php require(VIEW_PATH . 'template/footer.php'); ?>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+            });
+            loadrekapTable();
+        })
 
+        function loadrekapTable() {
+            var url = "<?= BASE_URL ?>rekap/rekap_data";
+            $('#rekapTable').DataTable({
+                searching: true,
+                paging: true,
+                destroy: true,
+                "ordering": false,
+                // serverSide: true,
+                ajax: url,
+                columns: [{
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'total',
+                        name: 'total'
+                    },
+                    {
+                        data: 'daytime',
+                        name: 'daytime'
+                    },
+                    {
+                        data: 'for_cash',
+                        name: 'for_cash'
+                    },
+                    {
+                        data: 'for_employee',
+                        name: 'for_employee'
+                    },
+                    {
+                        data: 'for_owner',
+                        name: 'for_owner'
+                    },
+                ],
+   
+                },
+
+            )};        
     </script>
 </body>
 
