@@ -48,76 +48,28 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
+                    <div class="content-wrapper">
+                        
+                <!-- Content -->
+                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif </h4>
 
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif</h4>
-                    <!-- Large Modal -->
-                     <div class="modal fade" id="pengeluaran" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel3">Tambah Pengeluaran</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="col-md-12" id="showAlert">
-
-                                            </div>
-
-                                            <form method="POST" id="spendInsertForm">
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="keterangan" class="form-label">Keterangan</label>
-                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="3"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="total" class="form-label">Total</label>
-                                                        <input type="number" id="total" required name="total" class="form-control digits" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="dayte" class="form-label">Tanggal</label>
-                                                        <input class="datepicker-here form-control" required name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
-                                                    </div>
-                                                </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Simpan <span id="loading" role="status"></span></button>
-                                            </form>
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                                Close
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        <!-- Content -->
-                        <div class="card">
+                 <!-- Content -->
+                    <div class="card">
                         <h5 class="card-header">Data Tarif</h5>
                             <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
-                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pengeluaran">
-                                    Export
-                                </button>
                             </div>
-                            
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
+                                    
                                     <table class="table" id="rekapTable">
                                         <thead>
                                             <tr>
-                                                <th>Tanggal</th>
-                                                <th>Total</th>
-                                                <th>Waktu</th>
-                                                <th>Kas</th>
-                                                <th>Karyawan</th>
-                                                <th>Pemilik</th>
+                                                <th>ID</th>
+                                                <th>keterangan</th>
+                                                <th>Jenis Kendaraan</th>
+                                                <th>Harga</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -129,7 +81,18 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
-                                                <th></th>
+                                                <th>
+                                        <div class="dropdown">
+                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                        <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                    <i class="bx bx-edit-alt me-1"></i> Edit</a >
+                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                    <i class="bx bx-trash me-1"></i> Delete</a>
+                                        </div>
+                                                </th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -137,12 +100,10 @@
                             </div>
                         </div>
 
-                        
-
                         <!--/ Card layout -->
                     </div>
-                    <!-- / Content -->
 
+                    <!-- / Content -->
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->
@@ -200,10 +161,8 @@
                         name: 'for_owner'
                     },
                 ],
-   
-                },
-
-            )};        
+            });
+        }
     </script>
 </body>
 
