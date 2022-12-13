@@ -26,7 +26,7 @@ class BookingAPIController extends ApiController
                 $data[] = $row;
             }
         } else {
-            $data = "0 results";
+            $data = [];
         }
         // $data = $this->get('id');
         // $data = $_GET['id'];
@@ -102,7 +102,7 @@ class BookingAPIController extends ApiController
                     $trans->rawQuery("INSERT INTO `transactions`(`id`, `name`, `is_done`, `plate_number`, `no_hp`, `merk_model`, `wash_type_id`, `time`, `total`, `date`) VALUES ('$data[0]','$data[1]','$data[3]','$data[5]','$data[2]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')");
                     new Exception("oopss.. ada yang salah");
                 } catch (Exception $e) {
-                    $this->errorResponse($e->getMessage(),500);
+                    $this->errorResponse($e->getMessage(), 500);
                 }
                 $this->succesResponse('', 'Pencucian selesai');
                 new Exception("Ooppss...ada kesalahan");
@@ -115,5 +115,4 @@ class BookingAPIController extends ApiController
             $this->errorResponse($e->getMessage(), 401);
         }
     }
-    
 }
