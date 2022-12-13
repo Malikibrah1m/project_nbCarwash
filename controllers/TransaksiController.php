@@ -20,6 +20,8 @@ class TransaksiController extends BaseController
     {
         $id = $this->get('id');
         $this->model->rawQuery("DELETE FROM `transactions` WHERE id = '$id'");
+        $url = BASE_URL . 'transaksi';
+        header("Location: $url");
 
 
         // $this->model->rawQuery("DELETE FROM transactions WHERE id = '$id'");
