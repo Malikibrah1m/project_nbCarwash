@@ -48,62 +48,66 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-                    <div class="content-wrapper">
-                        
-                <!-- Content -->
-                     <div class="container-xxl flex-grow-1 container-p-y">
+
+                <div class="content-wrapper">
+
+                    <!-- Content -->
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif </h4>
 
-                 <!-- Content -->
-                    <div class="card">
-                        <h5 class="card-header">Data Tarif</h5>
-                            <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
-                            </div>
+
+                        <div class="card">
+                            <h5 class="card-header">Data Tarif</h5>
+
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
+                                </pre>
                                 <div class="table-responsive text-nowrap">
-                                    
-                                    <table class="table" id="rekapTable">
+                                    <table class="table" id="wash_type_idTable">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Id</th>
                                                 <th>keterangan</th>
-                                                <th>Jenis Kendaraan</th>
+                                                <th>Jenis Pencucian</th>
                                                 <th>Harga</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            <?php
+                                            $no = 1;
+                                            while ($item = mysqli_fetch_array($transaksi)) :
+                                            ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $item['merk_model'] ?></td>
+                                                    <td><?= $item['wash_type_name'] ?></td>
+                                                    <td><?= $item['total'] ?></td>
+                                                    <td><span>
+                                                            <!-- <button type="button" class="btn btn-icon me-2 btn-primary">
+                                                                <span class="tf-icons bx bx-pencil"></span>
+                                                            </button> -->
+                                                            <a href="<?= BASE_URL ?>tarif/update?id=<?= $item['id'] ?>" type="button" class="btn btn-icon me-2 btn-danger">
+                                                                <span class="tf-icons bx bx-update"></span>
+                                                            </a>
+                                                        </span></td>
+                                                </tr>
+                                            <?php endwhile ?>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th>
-                                        <div class="dropdown">
-                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                        <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);">
-                                                    <i class="bx bx-edit-alt me-1"></i> Edit</a >
-                                                <a class="dropdown-item" href="javascript:void(0);">
-                                                    <i class="bx bx-trash me-1"></i> Delete</a>
-                                        </div>
-                                                </th>
-                                            </tr>
-                                        </tfoot>
+
                                     </table>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Content -->
+                        <!-- isi card -->
+
                         <!--/ Card layout -->
                     </div>
 
                     <!-- / Content -->
+
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->
@@ -114,56 +118,23 @@
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+
     <!-- / Layout wrapper -->
 
     <?php require(VIEW_PATH . 'template/footer.php'); ?>
-    <script>
-        $(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-            });
-            loadrekapTable();
-        })
 
-        function loadrekapTable() {
-            var url = "<?= BASE_URL ?>rekap/rekap_data";
-            $('#rekapTable').DataTable({
-                searching: true,
-                paging: true,
-                destroy: true,
-                "ordering": false,
-                // serverSide: true,
-                ajax: url,
-                columns: [{
-                        data: 'date',
-                        name: 'date'
-                    },
-                    {
-                        data: 'total',
-                        name: 'total'
-                    },
-                    {
-                        data: 'daytime',
-                        name: 'daytime'
-                    },
-                    {
-                        data: 'for_cash',
-                        name: 'for_cash'
-                    },
-                    {
-                        data: 'for_employee',
-                        name: 'for_employee'
-                    },
-                    {
-                        data: 'for_owner',
-                        name: 'for_owner'
-                    },
-                ],
+    <script>
+        $(document).ready(function() {
+            $('#wash_type_idTable').DataTable({
+                "bFilter": false,
             });
-        }
+            // $('.paginate_button.current').addClass('btn btn-primary')
+            // $('.paginate_button.previous.disabled').addClass('btn btn-default')
+            // $('.paginate_button.next.disabled').addClass('btn btn-default')
+        })
     </script>
+
+
 </body>
 
 </html>

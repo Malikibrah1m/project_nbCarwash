@@ -1,16 +1,27 @@
 <?php
 
-class TarifController extends BaseController{
+class TarifController extends BaseController
+{
+    private Transaksi $model;
 
-    public function __construct() {
+    public function __construct()
+    {
         session_start();
-        if (!$_SESSION['user']) {
-            return header("location: ".BASE_URL);
-        }
+        $this->model = new Transaksi();
     }
 
     public function getIndex()
     {
-        return $this->view('admin.tarif');
+        $data = $this->model->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id")->get();
+
+        return $this->view('admin.tarif', ['transaksi' => $data]);
+    }
+    public function getEdit()
+    {
+        $id = $this->get('id');
+        $this->model->rawQuery("UPDATE FROM `transactions` WHERE id = '$id'");
+
+
+        // $this->model->rawQuery("DELETE FROM transactions WHERE id = '$id'");
     }
 }
