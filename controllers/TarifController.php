@@ -22,6 +22,6 @@ class TarifController extends BaseController
         $this->model->rawQuery("UPDATE FROM `transactions` WHERE id = '$id'");
 
 
-        // $this->model->rawQuery("DELETE FROM transactions WHERE id = '$id'");
+        // $this->model->rawQuery("UPDATE FROM transactions WHERE id = '$id'");
     }
 }

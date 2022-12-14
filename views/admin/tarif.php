@@ -56,6 +56,52 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif </h4>
 
+                    <div class='card'>
+                        <div class="modal fade" id="tarif" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel3">Edit Tarif</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-md-12" id="showAlert">
+
+                                            </div>
+
+                                            <form method="POST" id="spendInsertForm">
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="keterangan" class="form-label">keterangan</label>
+                                                        <textarea class="form-control" name="keterangan" id="keterangan" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="jenis_pencucian" class="form-label">Jenis Pencucian</label>
+                                                        <input type="text" id="jenis_pencucian" name="jenis_pencucian" class="form-control" />
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="harga" class="form-label">Harga</label>
+                                                        <input type="text" id="harga" name="harga" class="form-control" />
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="card">
                             <h5 class="card-header">Data Tarif</h5>
@@ -63,7 +109,7 @@
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 </pre>
                                 <div class="table-responsive text-nowrap">
-                                    <table class="table" id="wash_type_idTable">
+                                    <table class="table" id="transaksiTable">
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
@@ -83,14 +129,11 @@
                                                     <td><?= $item['merk_model'] ?></td>
                                                     <td><?= $item['wash_type_name'] ?></td>
                                                     <td><?= $item['total'] ?></td>
-                                                    <td><span>
-                                                            <!-- <button type="button" class="btn btn-icon me-2 btn-primary">
-                                                                <span class="tf-icons bx bx-pencil"></span>
-                                                            </button> -->
-                                                            <a href="<?= BASE_URL ?>tarif/update?id=<?= $item['id'] ?>" type="button" class="btn btn-icon me-2 btn-danger">
-                                                                <span class="tf-icons bx bx-update"></span>
-                                                            </a>
-                                                        </span></td>
+                                                    <td>
+                                                        <button data-bs-toggle="modal" data-bs-target="#tarif" type="button" class="btn btn-primary">
+                                                            Edit
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             <?php endwhile ?>
                                         </tbody>
@@ -125,7 +168,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#wash_type_idTable').DataTable({
+            $('#transakasiTable').DataTable({
                 "bFilter": false,
             });
             // $('.paginate_button.current').addClass('btn btn-primary')
