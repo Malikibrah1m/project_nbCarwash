@@ -36,6 +36,7 @@ return array(
     'Spend' => $baseDir . '/models/Spend.php',
     'Stringable' => $vendorDir . '/myclabs/php-enum/stubs/Stringable.php',
     'Transaksi' => $baseDir . '/models/Transaksi.php',
+    'TransaksiAPIController' => $baseDir . '/controllers/api/TransaksiController.php',
     'TransaksiController' => $baseDir . '/controllers/TransaksiController.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'User' => $baseDir . '/models/User.php',
