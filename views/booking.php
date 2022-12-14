@@ -108,16 +108,16 @@
 <script>
     $(function() {
         $.validator.addMethod("checkAlpha", function(value, element) {
-            return (new RegExp("^[a-zA-Z]*$").test(value))
+            return (new RegExp("^[a-zA-Z ]*$").test(value))
         }, "Kolom harus diisi dengan huruf");
         $.validator.addMethod("checkTime",function(value,element){
-            return (new RegExp("^([0-1][0-9]|[2][0-3]):([0-5][0-9])$").test(value));
+            return (new RegExp("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$").test(value));
         }, "Format waktu tidak valid");
         $('#time').timepicker({
             showMeridian: false,
             showInputs: false,
             minuteStep: 1,
-            // format: 'hh:mm:ss'
+            format: 'hh:mm'
         });
         $('#insertBookingForm').validate({
             // wrapper: "#form-input",

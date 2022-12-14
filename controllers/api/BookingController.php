@@ -17,9 +17,9 @@ class BookingAPIController extends ApiController
     public function getIndex()
     {
         $date = Carbon::now()->format('Y-m-d');
-        $sql = "select * from `bookings` where id = '2022-12-11-adi-20:00'";
-        // $listData = $this->booking->rawQuery("SELECT bookings.id,bookings.name AS costumer_name,is_valid,is_done,no_hp,plate_number,merk_model,wash_types.name,time,total,date FROM `bookings` JOIN wash_types on wash_type_id = wash_types.id where date = '$date'")->get();
-        $listData = $this->booking->rawQuery($sql)->get();
+        // $sql = "select * from `bookings` where id = '2022-12-11-adi-20:00'";
+        $listData = $this->booking->rawQuery("SELECT bookings.id,bookings.name AS costumer_name,is_valid,is_done,no_hp,plate_number,merk_model,wash_types.name,time,total,date FROM `bookings` JOIN wash_types on wash_type_id = wash_types.id where date = '$date'")->get();
+        // $listData = $this->booking->rawQuery($sql)->get();
         $data = [];
         if ($listData->num_rows > 0) {
             while ($row = $listData->fetch_assoc()) {
@@ -100,6 +100,7 @@ class BookingAPIController extends ApiController
                 // $id = $data[0];
                 try {
                     $trans->rawQuery("INSERT INTO `transactions`(`id`, `name`, `is_done`, `plate_number`, `no_hp`, `merk_model`, `wash_type_id`, `time`, `total`, `date`) VALUES ('$data[0]','$data[1]','$data[3]','$data[5]','$data[2]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]')");
+                    $this->booking->rawQuery("delete from bookings where id = '$id'")->get();
                     new Exception("oopss.. ada yang salah");
                 } catch (Exception $e) {
                     $this->errorResponse($e->getMessage(), 500);
