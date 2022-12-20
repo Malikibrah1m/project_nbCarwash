@@ -94,7 +94,7 @@
                                                             <!-- <button type="button" class="btn btn-icon me-2 btn-primary">
                                                                 <span class="tf-icons bx bx-pencil"></span>
                                                             </button> -->
-                                                            <a href="<?= BASE_URL ?>transaksi/hapus?id=<?= $item['id'] ?>" type="button" class="btn btn-icon me-2 btn-danger">
+                                                            <a onclick="hapus('<?= $item['id'] ?>')" href="#" type="button" class="btn btn-icon me-2 btn-danger">
                                                                 <span class="tf-icons bx bx-trash"></span>
                                                             </a>
                                                         </span></td>
@@ -135,6 +135,24 @@
             // $('.paginate_button.previous.disabled').addClass('btn btn-default')
             // $('.paginate_button.next.disabled').addClass('btn btn-default')
         })
+
+        function hapus(data) {
+            var url = "<?= BASE_URL ?>transaksi/hapus?id=:id";
+            // console.log(data);
+            swal({
+                title: "Anda yakin?",
+                text: "Anda yakin ingin menghapus data ini??",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((willDelete) => {
+                // console.log(willDelete);
+                if (willDelete) {
+                    window.location.href = url.replace(':id', data);
+                }
+
+            });
+        }
     </script>
 </body>
 

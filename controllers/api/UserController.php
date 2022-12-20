@@ -1,6 +1,10 @@
 <?php
 
-class UserAPIController extends ApiController{
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+class UserAPIController extends ApiController
+{
 
     /**
      * method yang akan di panggil ketika aplikasi dijalankan
@@ -29,7 +33,25 @@ class UserAPIController extends ApiController{
         $data = array(
             'input1' => $this->post('input1'),
         );
-        $this->succesResponse($data);   
+        $this->succesResponse($data);
     }
 
+    public function getCheck()
+    {
+        header('Content-Type: application/json');
+        $headers = getallheaders();
+        if (!isset($headers['Authorization'])) {
+            http_response_code(401);
+            exit();
+        }
+        list(, $token) = explode(' ', $headers['Authorization']);
+        try {
+            JWT::decode($token,  new Key($_ENV['ACCESS_TOKEN_SECRET'], 'HS256'));
+            $this->succesResponse(array('data' => 'test1'));
+            new Exception("Token Error");
+        } catch (Exception $e) {
+            http_response_code(401);
+            $this->errorResponse($e->getMessage(), 401);
+        }
+    }
 }

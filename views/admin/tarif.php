@@ -48,34 +48,53 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
+                    <div class="content-wrapper">
+                        
+                <!-- Content -->
+                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif </h4>
 
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Reservasi </h4>
-                        <!-- Content -->
-                        <div class="card">
-                            <h5 class="card-header">Data Reservasi</h5>
+                 <!-- Content -->
+                    <div class="card">
+                        <h5 class="card-header">Data Tarif</h5>
+                            <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
+                            </div>
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
-
-                                    <table class="table" id="bookingTable">
+                                    
+                                    <table class="table" id="rekapTable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>ID</th>
-                                                <th>Nama Pemilik</th>
-                                                <th>Plat Nomor</th>
-                                                <th>Merk Model</th>
-                                                <th>Detail Pencucian</th>
-                                                <th>Total</th>
-                                                <th>Jam</th>
-                                                <th>Tanggal</th>
+                                                <th>keterangan</th>
+                                                <th>Jenis Kendaraan</th>
+                                                <th>Harga</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>
+                                        <div class="dropdown">
+                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                        <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                    <i class="bx bx-edit-alt me-1"></i> Edit</a >
+                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                    <i class="bx bx-trash me-1"></i> Delete</a>
+                                        </div>
+                                                </th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -83,8 +102,8 @@
 
                         <!--/ Card layout -->
                     </div>
-                    <!-- / Content -->
 
+                    <!-- / Content -->
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->
@@ -99,66 +118,47 @@
 
     <?php require(VIEW_PATH . 'template/footer.php'); ?>
     <script>
-        $(document).ready(function() {
+        $(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
             });
-            loadBookingTable();
-            // $('.paginate_button.current').addClass('btn btn-primary')
-            // $('.paginate_button.previous.disabled').addClass('btn btn-default')
-            // $('.paginate_button.next.disabled').addClass('btn btn-default')
+            loadrekapTable();
         })
 
-        function loadBookingTable() {
-            var url = "<?= BASE_URL ?>api/booking";
-            $('#bookingTable').DataTable({
-                "language": {
-                    "emptyTable": "Reservasi kosong",
-                },
-                searching: false,
+        function loadrekapTable() {
+            var url = "<?= BASE_URL ?>rekap/rekap_data";
+            $('#rekapTable').DataTable({
+                searching: true,
+                paging: true,
                 destroy: true,
                 "ordering": false,
+                // serverSide: true,
                 ajax: url,
                 columns: [{
-                        data: null,
-                        render: function(data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    {
-                        data: 'id',
-                        name: 'id',
-                        visible: false
-                    },
-                    {
-                        data: 'costumer_name',
-                        name: 'costumer_name'
-                    },
-                    {
-                        data: 'plate_number',
-                        name: 'plate_number'
-                    },
-                    {
-                        data: 'merk_model',
-                        name: 'merk_model'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
+                        data: 'date',
+                        name: 'date'
                     },
                     {
                         data: 'total',
                         name: 'total'
                     },
                     {
-                        data: 'time',
-                        name: 'time'
+                        data: 'daytime',
+                        name: 'daytime'
                     },
                     {
-                        data: 'date',
-                        name: 'date'
+                        data: 'for_cash',
+                        name: 'for_cash'
+                    },
+                    {
+                        data: 'for_employee',
+                        name: 'for_employee'
+                    },
+                    {
+                        data: 'for_owner',
+                        name: 'for_owner'
                     },
                 ],
             });

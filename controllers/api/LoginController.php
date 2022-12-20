@@ -2,9 +2,13 @@
 
 use Firebase\JWT\JWT;
 
-class LoginController extends ApiController
+class LoginAPIController extends ApiController
 {
 
+    private $user;
+    public function __construct() {
+        $this->user = new User;
+    }
     use Request;
     public function postIndex()
     {
@@ -22,12 +26,12 @@ class LoginController extends ApiController
                 $access_token = JWT::encode($payload, $_ENV['ACCESS_TOKEN_SECRET'],'HS256');
                 $data = array(
                     'email'=> $input->email,
-                    'nama' => $input->name,
+                    'nama' => $user['name'],
                     'token' => $access_token
                 );
                 return $this->succesResponse($data);
             } else {
-                return $this->errorResponse('Oopss');
+                return $this->errorResponse('Oopss ada kesalahan, mohon cek kembali email dan password anda',401);
             }
         }
         // return $this->succesResponse('Hello World');

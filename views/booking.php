@@ -38,7 +38,7 @@
                         Ooops Ada yang salah...
                     </div>
                 <?php } ?>
-                <form action="<?= BASE_URL ?>booking/insert" method="POST">
+                <form action="<?= BASE_URL ?>booking/insert" method="POST" id="insertBookingForm">
                     <div class="row">
                         <div class="col mb-3">
                             <label for="name" class="form-label">Nama Pemilik</label>
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="wash_type" class="form-label">Tipe Pencucian</label>
-                            <select class="form-select" id="wash_type">
+                            <select class="form-select" id="wash_type" required>
                                 <option value=""></option>
                                 <option value="Motor">Motor</option>
                                 <option value="Mobil">Mobil</option>
@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="wash_type_id" class="form-label">Detail Pencucian</label>
-                            <select class="form-select" name="wash_type_id" id="detailPencucian">
+                            <select class="form-select" required name="wash_type_id" id="detailPencucian">
                             </select>
                         </div>
                     </div>
@@ -98,17 +98,68 @@
     </div>
     </div>
 </body>
-<script src="<?= ASSET_PATH ?>vendor/libs/jquery/jquery.js"></script>
-<script src="<?= ASSET_PATH ?>vendor/libs/popper/popper.js"></script>
-<script src="<?= ASSET_PATH ?>vendor/libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-<script src="<?= ASSET_PATH ?>vendor/libs/select2/select2.full.min.js"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/jquery/jquery.js' ?>"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/popper/popper.js' ?>"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js' ?>"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/select2/select2.full.min.js' ?>"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/jquery/validate/jquery.validate.js' ?>"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/jquery/validate/additional-methods.js' ?>"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/jquery/validate/localization/messages_id.js' ?>"></script>
 <script>
     $(function() {
+        $.validator.addMethod("checkAlpha", function(value, element) {
+            return (new RegExp("^[a-zA-Z ]*$").test(value))
+        }, "Kolom harus diisi dengan huruf");
+        $.validator.addMethod("checkTime",function(value,element){
+            return (new RegExp("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$").test(value));
+        }, "Format waktu tidak valid");
         $('#time').timepicker({
             showMeridian: false,
             showInputs: false,
             minuteStep: 1,
-            // format: 'hh:mm:ss'
+            format: 'hh:mm'
+        });
+        $('#insertBookingForm').validate({
+            // wrapper: "#form-input",
+            rules: {
+                name: {
+                    required: true,
+                    checkAlpha: true,
+                },
+                time: {
+                    required: true,
+                    checkTime: true
+                },
+                merk_model: {
+                    required: true,
+                },
+                plate_number: {
+                    required: true,
+                },
+                total: {
+                    required: true,
+                    number: true,
+                },
+                no_hp: {
+                    required: true,
+                    number: true,
+                    maxlength: 12,
+                },
+
+            },
+            errorElement: "span",
+            errorPlacement: function(error, element) {
+                error.addClass("invalid-feedback");
+                // error.appendTo("#form-input");
+                error.insertAfter(element);
+                // Add the `help-block` class to the error element
+
+                // if (element.prop("type") === "checkbox") {
+                //     error.insertAfter(element.parent("label"));
+                // } else {
+                //     error.insertAfter(element);
+                // }
+            },
         });
     })
     $('#wash_type').on('change', function() {
@@ -170,5 +221,3 @@
         });
     })
 </script>
-
-</html>

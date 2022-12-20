@@ -120,8 +120,8 @@
                                                 <th>ID</th>
                                                 <th>no</th>
                                                 <th>Keterangan</th>
-                                                <th>Total</th>
                                                 <th>Tanggal</th>
+                                                <th>Total</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
