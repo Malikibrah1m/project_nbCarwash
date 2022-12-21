@@ -83,8 +83,7 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="dayte" class="form-label">Password</label>
-                                                        <select class="form-select" name="user_id" id="user_id" style="width: 100%">
-                                                        </select>>
+                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="1"></textarea>
                                                     </div>
                                                 </div>
 
