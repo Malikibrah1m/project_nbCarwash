@@ -77,13 +77,14 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="total" class="form-label">Email</label>
-                                                        <input type="number" id="total" required name="total" class="form-control digits" />
+                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="1"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="dayte" class="form-label">Password</label>
-                                                        <input class="datepicker-here form-control" required name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
+                                                        <select class="form-select" name="user_id" id="user_id" style="width: 100%">
+                                                        </select>>
                                                     </div>
                                                 </div>
 
