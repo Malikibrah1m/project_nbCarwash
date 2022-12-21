@@ -77,14 +77,13 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="total" class="form-label">Email</label>
-                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="1"></textarea>
+                                                        <input type="number" id="total" required name="total" class="form-control digits" />
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="dayte" class="form-label">Password</label>
-                                                        <select class="form-select" name="user_id" id="user_id" style="width: 100%">
-                                                        </select>
+                                                        <input class="datepicker-here form-control" required name="date" type="text" id="daterange" data-date-container='#pengeluaran' data-range="true" data-date-format="yyyy-mm-dd" data-multiple-dates-separator=" - " data-language="en" autocomplete="off" data-bs-original-title="" title="">
                                                     </div>
                                                 </div>
 
@@ -100,7 +99,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="card-header">Data Karyawan</h5>
+                            <h5 class="card-header">Data Pengeluaran</h5>
                             <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
                                 <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pengeluaran">
                                     Tambah Data
@@ -113,9 +112,10 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nama</th>
-                                                <th>Email</th>
-                                                <th>Password</th>
+                                                <th>no</th>
+                                                <th>Keterangan</th>
+                                                <th>Tanggal</th>
+                                                <th>Total</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -124,21 +124,12 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                            <th></th>
+                                                <th colspan="1">Total:</th>
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
-                                                <th>
-                                        <div class="dropdown">
-                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                        <div class="dropdown-menu">
-
-                                                <a class="dropdown-item" href="javascript:void(0);">
-                                                    <i class="bx bx-trash me-1"></i> Delete</a>
-                                        </div>
-                                                </th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -169,49 +160,122 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
+
             });
-            loadrekapTable();
+            $('#spendInsertForm').validate({
+                // wrapper: "#form-input",
+                rules: {
+                    keterangan: {
+                        required: true,
+                    },
+                    total: {
+                        required: true,
+                        number: true,
+                    },
+                    daterange: {
+                        required: true,
+                        date: true,
+                    },
+
+
+                },
+                errorElement: "span",
+                errorPlacement: function(error, element) {
+                    error.addClass("invalid-feedback");
+                    // error.appendTo("#form-input");
+                    error.insertAfter(element);
+                    // Add the `help-block` class to the error element
+
+                    // if (element.prop("type") === "checkbox") {
+                    //     error.insertAfter(element.parent("label"));
+                    // } else {
+                    //     error.insertAfter(element);
+                    // }
+                },
+            });
+            loadPengeluaranTable();
         })
 
-        function loademployeeTable() {
-            var url = "<?= BASE_URL ?>employees/employees_data";
-            $('#employeesTable').DataTable({
+        function loadPengeluaranTable() {
+            var url = "<?= BASE_URL ?>pengeluaran/pengeluaran_data";
+            $('#tablePengeluaran').DataTable({
                 searching: true,
                 paging: true,
                 destroy: true,
                 "ordering": false,
                 // serverSide: true,
                 ajax: url,
+                columnDefs: [{
+                    target: 2,
+                    visible: false,
+                }],
                 columns: [{
+                        data: null,
+                        render: function(dadta, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
                         data: 'id',
                         name: 'id',
-                        visible: false
+                        visible: false,
                     },
                     {
-                        data: 'name',
-                        name: 'name',
+                        data: 'keterangan',
+                        name: 'keterangan'
                     },
                     {
-                        data: 'email',
-                        name: 'email'
+                        data: 'date',
+                        name: 'date'
                     },
                     {
-                        data: 'password',
-                        name: 'password'
+                        data: 'total',
+                        name: 'total'
                     },
                     {
                         data: 'aksi',
                         name: 'aksi',
                         render: function(data, type, row) {
-                            return `<button onclick="hapus('` + row.id + `')" class="btn btn-icon me-2 btn-danger"><span class="tf-icons bx bx-trash"></span></button>`;
+                            return '<button onclick="hapus(' + row.id + ')" class="btn btn-icon me-2 btn-danger"><span class="tf-icons bx bx-trash"></span></button>';
                         }
-                    },
+                    }
                 ],
+                footerCallback: function(row, data, start, end, display) {
+                    var api = this.api();
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ?
+                            i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column(4)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(4, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(4).footer()).html('Rp. ' + total);
+                },
+
             });
         }
 
         function hapus(data) {
-            var url = "<?= BASE_URL ?>employees/hapus?id=:id";
+            var url = "<?= BASE_URL ?>pengeluaran/delete?id=:id";
             // console.log(data);
             swal({
                 title: "Anda yakin?",
@@ -228,7 +292,7 @@
                         cache: false,
                         processData: false,
                         success: (data) => {
-                            loadTransTable();
+                            loadPengeluaranTable();
                             swal("Success", "Data berhasil dihapus", "success");
                             // $("#btn-save").html('Submit');
                             // $("#btn-save"). attr("disabled", false);
@@ -241,6 +305,34 @@
 
             });
         }
+
+        $('#spendInsertForm').submit(function(e) {
+            var form = $('#spendInsertForm');
+            if (form.valid()) {
+                console.log(form.valid());
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: "<?= BASE_URL ?>pengeluaran/insert",
+                    type: 'POST',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        $('#pengeluaran').modal('hide');
+                        loadPengeluaranTable();
+                        swal("Success", "Data berhasil dimasukkan", "success");
+                        // $("#btn-save").html('Submit');
+                        // $("#btn-save"). attr("disabled", false);
+                    },
+                    error: function(data) {
+                        swal("Gagal", "Data telah ada", "error");
+                    }
+                })
+            }
+
+        })
     </script>
 </body>
 
