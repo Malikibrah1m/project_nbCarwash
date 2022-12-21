@@ -15,5 +15,18 @@ class KaryawanController extends BaseController
         
     }
 
-    
+    public function deleteHapus()
+    {
+        $id = $this->get('id');
+        $this->model->rawQuery("DELETE FROM `employee` WHERE id = '$id'");
+        $url = BASE_URL . 'employee';
+        header("Location: $url");
+        // $this->model->rawQuery("DELETE FROM employee WHERE id = '$id'");
+    }
+
+    public function getData_trans()
+    {
+        
+
+}
 }
