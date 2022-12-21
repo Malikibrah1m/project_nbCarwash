@@ -64,6 +64,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
+                                                <th>id</th>
                                                 <th>Nama</th>
                                                 <th>No. Hp</th>
                                                 <th>Tipe pencucian</th>
@@ -76,30 +77,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $no = 1;
-                                            while ($item = mysqli_fetch_array($transaksi)) :
-                                            ?>
-                                                <tr>
-                                                    <td><?= $no++ ?></td>
-                                                    <td><?= $item['name'] ?></td>
-                                                    <td><?= $item['no_hp'] ?></td>
-                                                    <td><?= $item['wash_type_name'] ?></td>
-                                                    <td><?= $item['plate_number'] ?></td>
-                                                    <td><?= $item['merk_model'] ?></td>
-                                                    <td><?= $item['time'] ?></td>
-                                                    <td><?= $item['date'] ?></td>
-                                                    <td><?= $item['total'] ?></td>
-                                                    <td><span>
-                                                            <!-- <button type="button" class="btn btn-icon me-2 btn-primary">
-                                                                <span class="tf-icons bx bx-pencil"></span>
-                                                            </button> -->
-                                                            <a onclick="hapus('<?= $item['id'] ?>')" href="#" type="button" class="btn btn-icon me-2 btn-danger">
-                                                                <span class="tf-icons bx bx-trash"></span>
-                                                            </a>
-                                                        </span></td>
-                                                </tr>
-                                            <?php endwhile ?>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -128,13 +106,75 @@
 
     <script>
         $(document).ready(function() {
-            $('#transaksiTable').DataTable({
-                "bFilter": false,
-            });
+            loadTransTable();
             // $('.paginate_button.current').addClass('btn btn-primary')
             // $('.paginate_button.previous.disabled').addClass('btn btn-default')
             // $('.paginate_button.next.disabled').addClass('btn btn-default')
         })
+
+        function loadTransTable() {
+            var url = "<?= BASE_URL ?>transaksi/data_trans";
+            $('#transaksiTable').DataTable({
+                "language": {
+                    "emptyTable": "Reservasi kosong",
+                },
+                searching: false,
+                destroy: true,
+                "ordering": false,
+                ajax: url,
+                columns: [{
+                        data: null,
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        data: 'id',
+                        name: 'id',
+                        visible: false
+                    },
+                    {
+                        data: 'name',
+                        name: 'name',
+                    },
+                    {
+                        data: 'no_hp',
+                        name: 'no_hp'
+                    },
+                    {
+                        data: 'wash_type_name',
+                        name: 'wash_type_name'
+                    },
+                    {
+                        data: 'plate_number',
+                        name: 'plate_number'
+                    },
+                    {
+                        data: 'merk_model',
+                        name: 'merk_model'
+                    },
+                    {
+                        data: 'time',
+                        name: 'time'
+                    },
+                    {
+                        data: 'total',
+                        name: 'total'
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        render: function(data, type, row) {
+                            return `<button onclick="hapus('` + row.id + `')" class="btn btn-icon me-2 btn-danger"><span class="tf-icons bx bx-trash"></span></button>`;
+                        }
+                    }
+                ],
+            });
+        }
 
         function hapus(data) {
             var url = "<?= BASE_URL ?>transaksi/hapus?id=:id";
@@ -148,7 +188,21 @@
             }).then((willDelete) => {
                 // console.log(willDelete);
                 if (willDelete) {
-                    window.location.href = url.replace(':id', data);
+                    $.ajax({
+                        url: url.replace(':id', data),
+                        type: 'DELETE',
+                        cache: false,
+                        processData: false,
+                        success: (data) => {
+                            loadTransTable();
+                            swal("Success", "Data berhasil dihapus", "success");
+                            // $("#btn-save").html('Submit');
+                            // $("#btn-save"). attr("disabled", false);
+                        },
+                        error: function(data) {
+                            swal("Gagal", "Error!!", "error");
+                        }
+                    })
                 }
 
             });

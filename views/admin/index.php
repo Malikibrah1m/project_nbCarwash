@@ -96,7 +96,7 @@
                                                     </div>
                                                 </div>
                                                 <span class="fw-semibold d-block mb-1">Profit</span>
-                                                <h3 class="card-title mb-2">$12,628</h3>
+                                                <h5 class="card-title mb-2">Rp.<?=number_format($data['profitPerbulan'])?></h5>
                                                 <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
                                             </div>
                                         </div>
@@ -131,10 +131,10 @@
                                 <div class="card">
                                     <div class="row row-bordered g-0">
                                         <div class="col-md-12">
-                                            <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
+                                            <h5 class="card-header m-0 me-2 pb-3">Total Pencucian <span class="badge bg-label-success rounded-pill"><?= Carbon\Carbon::now()->format('Y') ?></span></h5>
                                             <div id="totalRevenueChart" class="px-2"></div>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                                                     <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                                         <div class="card-title">
                                                             <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                                            <span class="badge bg-label-warning rounded-pill">Year 2021</span>
+                                                            <span class="badge bg-label-warning rounded-pill"><?= Carbon\Carbon::now()->format('Y') ?></span>
                                                         </div>
                                                         <div class="mt-sm-auto">
                                                             <small class="text-success text-nowrap fw-semibold"><i class="bx bx-chevron-up"></i> 68.2%</small>
@@ -237,10 +237,11 @@
             // --------------------------------------------------------------------
             const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
                 totalRevenueChartOptions = {
-                    series: [{
-                            name: '2021',
-                            data: [18, 7, 15, 29, 18, 12, 9,10,17,12,7,4]
-                        },
+                    series: [
+                        // {
+                        //     name: '',
+                        //     data: [{"y":18}, 7, 15, 29, 18, 12, 9,10,17,12,7,4]
+                        // },
                     ],
                     chart: {
                         height: 300,
@@ -253,7 +254,7 @@
                     plotOptions: {
                         bar: {
                             horizontal: false,
-                            columnWidth: '33%',
+                            columnWidth: '45%',
                             borderRadius: 12,
                             startingShape: 'rounded',
                             endingShape: 'rounded'
@@ -296,7 +297,7 @@
                         }
                     },
                     xaxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul','Agust','Sep','Okt','Nov','Des'],
+                        // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agust', 'Sep', 'Okt', 'Nov', 'Des'],
                         labels: {
                             style: {
                                 fontSize: '13px',
@@ -312,6 +313,10 @@
                     },
                     yaxis: {
                         labels: {
+
+                            formatter: (value) => {
+                                return value.toFixed(0)
+                            },
                             style: {
                                 fontSize: '13px',
                                 colors: axisColor
@@ -489,88 +494,15 @@
             if (typeof totalRevenueChartEl !== undefined && totalRevenueChartEl !== null) {
                 const totalRevenueChart = new ApexCharts(totalRevenueChartEl, totalRevenueChartOptions);
                 totalRevenueChart.render();
+                $.getJSON('<?= BASE_URL ?>admin/data_tahunan', function(response) {
+                    totalRevenueChart.updateSeries([{
+                        name: '<?= Carbon\Carbon::now()->format('Y') ?>',
+                        data: response
+                    }])
+                });
             }
 
-            // Growth Chart - Radial Bar Chart
-            // --------------------------------------------------------------------
-            const growthChartEl = document.querySelector('#growthChart'),
-                growthChartOptions = {
-                    series: [78],
-                    labels: ['Growth'],
-                    chart: {
-                        height: 240,
-                        type: 'radialBar'
-                    },
-                    plotOptions: {
-                        radialBar: {
-                            size: 150,
-                            offsetY: 10,
-                            startAngle: -150,
-                            endAngle: 150,
-                            hollow: {
-                                size: '55%'
-                            },
-                            track: {
-                                background: cardColor,
-                                strokeWidth: '100%'
-                            },
-                            dataLabels: {
-                                name: {
-                                    offsetY: 15,
-                                    color: headingColor,
-                                    fontSize: '15px',
-                                    fontWeight: '600',
-                                    fontFamily: 'Public Sans'
-                                },
-                                value: {
-                                    offsetY: -25,
-                                    color: headingColor,
-                                    fontSize: '22px',
-                                    fontWeight: '500',
-                                    fontFamily: 'Public Sans'
-                                }
-                            }
-                        }
-                    },
-                    colors: [config.colors.primary],
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            shade: 'dark',
-                            shadeIntensity: 0.5,
-                            gradientToColors: [config.colors.primary],
-                            inverseColors: true,
-                            opacityFrom: 1,
-                            opacityTo: 0.6,
-                            stops: [30, 70, 100]
-                        }
-                    },
-                    stroke: {
-                        dashArray: 5
-                    },
-                    grid: {
-                        padding: {
-                            top: -35,
-                            bottom: -10
-                        }
-                    },
-                    states: {
-                        hover: {
-                            filter: {
-                                type: 'none'
-                            }
-                        },
-                        active: {
-                            filter: {
-                                type: 'none'
-                            }
-                        }
-                    }
-                };
-            if (typeof growthChartEl !== undefined && growthChartEl !== null) {
-                const growthChart = new ApexCharts(growthChartEl, growthChartOptions);
-                growthChart.render();
-            }
+
 
             // Profit Report Line Chart
             // --------------------------------------------------------------------
@@ -610,7 +542,7 @@
                         curve: 'smooth'
                     },
                     series: [{
-                            name: '2022',
+                            name: '<?= Carbon\Carbon::now()->format('Y') ?>',
                             data: [110, 270, 145, 245, 205, 285]
                         },
 
@@ -634,244 +566,6 @@
             if (typeof profileReportChartEl !== undefined && profileReportChartEl !== null) {
                 const profileReportChart = new ApexCharts(profileReportChartEl, profileReportChartConfig);
                 profileReportChart.render();
-            }
-
-            // Order Statistics Chart
-            // --------------------------------------------------------------------
-            const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
-                orderChartConfig = {
-                    chart: {
-                        height: 165,
-                        width: 130,
-                        type: 'donut'
-                    },
-                    labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-                    series: [85, 15, 50, 50],
-                    colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
-                    stroke: {
-                        width: 5,
-                        colors: cardColor
-                    },
-                    dataLabels: {
-                        enabled: false,
-                        formatter: function(val, opt) {
-                            return parseInt(val) + '%';
-                        }
-                    },
-                    legend: {
-                        show: false
-                    },
-                    grid: {
-                        padding: {
-                            top: 0,
-                            bottom: 0,
-                            right: 15
-                        }
-                    },
-                    plotOptions: {
-                        pie: {
-                            donut: {
-                                size: '75%',
-                                labels: {
-                                    show: true,
-                                    value: {
-                                        fontSize: '1.5rem',
-                                        fontFamily: 'Public Sans',
-                                        color: headingColor,
-                                        offsetY: -15,
-                                        formatter: function(val) {
-                                            return parseInt(val) + '%';
-                                        }
-                                    },
-                                    name: {
-                                        offsetY: 20,
-                                        fontFamily: 'Public Sans'
-                                    },
-                                    total: {
-                                        show: true,
-                                        fontSize: '0.8125rem',
-                                        color: axisColor,
-                                        label: 'Weekly',
-                                        formatter: function(w) {
-                                            return '38%';
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                };
-            if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
-                const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
-                statisticsChart.render();
-            }
-
-            // Income Chart - Area chart
-            // --------------------------------------------------------------------
-            const incomeChartEl = document.querySelector('#incomeChart'),
-                incomeChartConfig = {
-                    series: [{
-                        data: [24, 21, 30, 22, 42, 26, 35, 29]
-                    }],
-                    chart: {
-                        height: 215,
-                        parentHeightOffset: 0,
-                        parentWidthOffset: 0,
-                        toolbar: {
-                            show: false
-                        },
-                        type: 'area'
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        width: 2,
-                        curve: 'smooth'
-                    },
-                    legend: {
-                        show: false
-                    },
-                    markers: {
-                        size: 6,
-                        colors: 'transparent',
-                        strokeColors: 'transparent',
-                        strokeWidth: 4,
-                        discrete: [{
-                            fillColor: config.colors.white,
-                            seriesIndex: 0,
-                            dataPointIndex: 7,
-                            strokeColor: config.colors.primary,
-                            strokeWidth: 2,
-                            size: 6,
-                            radius: 8
-                        }],
-                        hover: {
-                            size: 7
-                        }
-                    },
-                    colors: [config.colors.primary],
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            shade: shadeColor,
-                            shadeIntensity: 0.6,
-                            opacityFrom: 0.5,
-                            opacityTo: 0.25,
-                            stops: [0, 95, 100]
-                        }
-                    },
-                    grid: {
-                        borderColor: borderColor,
-                        strokeDashArray: 3,
-                        padding: {
-                            top: -20,
-                            bottom: -8,
-                            left: -10,
-                            right: 8
-                        }
-                    },
-                    xaxis: {
-                        categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                        axisBorder: {
-                            show: false
-                        },
-                        axisTicks: {
-                            show: false
-                        },
-                        labels: {
-                            show: true,
-                            style: {
-                                fontSize: '13px',
-                                colors: axisColor
-                            }
-                        }
-                    },
-                    yaxis: {
-                        labels: {
-                            show: false
-                        },
-                        min: 10,
-                        max: 50,
-                        tickAmount: 4
-                    }
-                };
-            if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {
-                const incomeChart = new ApexCharts(incomeChartEl, incomeChartConfig);
-                incomeChart.render();
-            }
-
-            // Expenses Mini Chart - Radial Chart
-            // --------------------------------------------------------------------
-            const weeklyExpensesEl = document.querySelector('#expensesOfWeek'),
-                weeklyExpensesConfig = {
-                    series: [65],
-                    chart: {
-                        width: 60,
-                        height: 60,
-                        type: 'radialBar'
-                    },
-                    plotOptions: {
-                        radialBar: {
-                            startAngle: 0,
-                            endAngle: 360,
-                            strokeWidth: '8',
-                            hollow: {
-                                margin: 2,
-                                size: '45%'
-                            },
-                            track: {
-                                strokeWidth: '50%',
-                                background: borderColor
-                            },
-                            dataLabels: {
-                                show: true,
-                                name: {
-                                    show: false
-                                },
-                                value: {
-                                    formatter: function(val) {
-                                        return '$' + parseInt(val);
-                                    },
-                                    offsetY: 5,
-                                    color: '#697a8d',
-                                    fontSize: '13px',
-                                    show: true
-                                }
-                            }
-                        }
-                    },
-                    fill: {
-                        type: 'solid',
-                        colors: config.colors.primary
-                    },
-                    stroke: {
-                        lineCap: 'round'
-                    },
-                    grid: {
-                        padding: {
-                            top: -10,
-                            bottom: -15,
-                            left: -10,
-                            right: -10
-                        }
-                    },
-                    states: {
-                        hover: {
-                            filter: {
-                                type: 'none'
-                            }
-                        },
-                        active: {
-                            filter: {
-                                type: 'none'
-                            }
-                        }
-                    }
-                };
-            if (typeof weeklyExpensesEl !== undefined && weeklyExpensesEl !== null) {
-                const weeklyExpenses = new ApexCharts(weeklyExpensesEl, weeklyExpensesConfig);
-                weeklyExpenses.render();
             }
         </script>
 </body>
