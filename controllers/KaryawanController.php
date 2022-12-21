@@ -14,6 +14,4 @@ class KaryawanController extends BaseController
      return $this->view('admin.employee');
         
     }
-
-    
 }
