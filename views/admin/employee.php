@@ -112,6 +112,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
+                                                <th>ID</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
                                                 <th>Password</th>
@@ -119,7 +120,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -191,7 +192,7 @@
         })
 
         function loadPengeluaranTable() {
-            var url = "<?= BASE_URL ?>pengeluaran/pengeluaran_data";
+            var url = "<?= BASE_URL ?>employees/employees_data";
             $('#tablePengeluaran').DataTable({
                 searching: true,
                 paging: true,
@@ -215,7 +216,7 @@
                         visible: false,
                     },
                     {
-                        data: 'keterangan',
+                        data: 'nama',
                         name: 'keterangan'
                     },
                     {
@@ -260,16 +261,13 @@
                         .reduce(function(a, b) {
                             return intVal(a) + intVal(b);
                         }, 0);
-
-                    // Update footer
-                    $(api.column(4).footer()).html('Rp. ' + total);
                 },
 
             });
         }
 
         function hapus(data) {
-            var url = "<?= BASE_URL ?>pengeluaran/delete?id=:id";
+            var url = "<?= BASE_URL ?>employee/delete?id=:id";
             // console.log(data);
             swal({
                 title: "Anda yakin?",
