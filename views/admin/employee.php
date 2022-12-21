@@ -123,12 +123,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="1">Total:</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
+                                            
                                             </tr>
                                         </tfoot>
                                     </table>
