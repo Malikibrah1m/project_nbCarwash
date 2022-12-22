@@ -95,9 +95,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span class="fw-semibold d-block mb-1">Profit</span>
+                                                <h6 class="fw-semibold d-block mb-1">Profit <span class="badge bg-label-warning rounded-pill"><?= Carbon\Carbon::now()->format('M') ?></span></h6>
+                                                
                                                 <h5 class="card-title mb-2">Rp.<?=number_format($data['profitPerbulan'])?></h5>
-                                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                                                <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small> -->
                                             </div>
                                         </div>
                                     </div>
@@ -118,9 +119,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span>Sales</span>
+                                                <span>Kas Per-Minggu</span>
                                                 <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                                                <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> -->
                                             </div>
                                         </div>
                                     </div>
@@ -158,9 +159,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span class="d-block mb-1">Payments</span>
+                                                <span class="d-block mb-1">Kas Per-Bulan</span>
                                                 <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                                                <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+                                                <!-- <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small> -->
                                             </div>
                                         </div>
                                     </div>
@@ -183,7 +184,7 @@
                                                 </div>
                                                 <span class="fw-semibold d-block mb-1">Transactions</span>
                                                 <h3 class="card-title mb-2">$14,857</h3>
-                                                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+                                                <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small> -->
                                             </div>
                                         </div>
                                     </div>
@@ -197,8 +198,8 @@
                                                             <span class="badge bg-label-warning rounded-pill"><?= Carbon\Carbon::now()->format('Y') ?></span>
                                                         </div>
                                                         <div class="mt-sm-auto">
-                                                            <small class="text-success text-nowrap fw-semibold"><i class="bx bx-chevron-up"></i> 68.2%</small>
-                                                            <h3 class="mb-0">$84,686k</h3>
+                                                            <!-- <small class="text-success text-nowrap fw-semibold"><i class="bx bx-chevron-up"></i> 68.2%</small> -->
+                                                            <h3 class="mb-0">Rp.<?=number_format($data['profitPerTahun'])?></h3>
                                                         </div>
                                                     </div>
                                                     <div id="profileReportChart"></div>

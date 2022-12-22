@@ -54,8 +54,11 @@
         background-color: rgb(105, 108, 255);
     }
 
-    .datepicker--cell .datepicker--cell-day .-selected- {
-        background-color: rgb(105, 108, 255);
+    .datepicker--cell-day .-range-from- .-selected-{
+        background-color: rgb(105, 108, 255) !important;
+    }
+    .datepicker--cell-day .-range-to- .-current- .-selected-{
+        background-color: rgb(105, 108, 255) !important;
     }
 
     .datepicker {
