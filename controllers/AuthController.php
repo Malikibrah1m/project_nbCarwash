@@ -2,7 +2,7 @@
 
 class AuthController extends BaseController
 {
-    
+
     private $user;
     public function __construct()
     {
@@ -19,8 +19,13 @@ class AuthController extends BaseController
             $user = mysqli_fetch_assoc($user);
             if (password_verify($password, $user['password'])) {
                 $_SESSION["user"] = $user;
-                header("Location: " . BASE_URL . "admin");
-            }else{
+                if ($user['role'] != 'admin') {
+                    header("Location: " . BASE_URL . "?error=true&&message=Anda harus login sebagai admin");
+                } else {
+
+                    header("Location: " . BASE_URL . "admin");
+                }
+            } else {
                 header("Location: " . BASE_URL . "?error=true&&message=Cek kembali email atau password anda");
             }
         }

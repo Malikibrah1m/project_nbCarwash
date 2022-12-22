@@ -207,6 +207,7 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
 
     public static $classMap = array (
         'AdminController' => __DIR__ . '/../..' . '/controllers/AdminController.php',
+        'AkunController' => __DIR__ . '/../..' . '/controllers/AkunController.php',
         'ApiController' => __DIR__ . '/../..' . '/controllers/ApiController.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Auth' => __DIR__ . '/../..' . '/traits/Auth.php',

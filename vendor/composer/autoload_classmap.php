@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdminController' => $baseDir . '/controllers/AdminController.php',
+    'AkunController' => $baseDir . '/controllers/AkunController.php',
     'ApiController' => $baseDir . '/controllers/ApiController.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Auth' => $baseDir . '/traits/Auth.php',
