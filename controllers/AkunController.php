@@ -20,7 +20,7 @@ class AkunController extends BaseController
         $user = new User;
         $timestamp = Carbon::now()->toDateTimeString();
         $email = $this->post('email');
-        $pass = $this->post('password');
+        $pass = password_hash($this->post('password'),PASSWORD_BCRYPT);
         $id = $this->post('id');
         if ($pass == '') {
             $result = $user->rawQuery("UPDATE `users` SET `email`='$email',`updated_at`='$timestamp' WHERE id = '$id'")->get();
