@@ -21,8 +21,12 @@ class AdminController extends BaseController
         $month = Carbon::now()->format('m');
         $profit = new Profit();
         $profitPerBulan = $profit->rawQuery("select sum(for_owner) as totalPerBulan from profits where month(date) = $month && year(date) = $year")->get();
+        $profitPerTahun = $profit->rawQuery("select sum(for_owner) as totalPerTahun from profits where year(date) = $year")->get();
         while ($row = $profitPerBulan->fetch_assoc()) {
             $data['profitPerbulan'] = $row['totalPerBulan'];
+        }
+        while ($row = $profitPerTahun->fetch_assoc()) {
+            $data['profitPerTahun'] = $row['totalPerTahun'];
         }
         // $data 
         // print_r($data);

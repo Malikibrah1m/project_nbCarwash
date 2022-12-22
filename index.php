@@ -1,8 +1,12 @@
 <?php
 
+use Carbon\Carbon;
 use Laravolt\Avatar\Avatar;
 
 require_once 'vendor/autoload.php';
+date_default_timezone_set('Asia/Jakarta');
+setlocale(LC_ALL, 'id_ID');
+Carbon::setLocale('id');
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 define('APP_PATH', './');
