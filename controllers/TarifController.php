@@ -16,12 +16,20 @@ class TarifController extends BaseController
 
         return $this->view('admin.tarif', ['transaksi' => $data]);
     }
+    
     public function getEdit()
     {
         $id = $this->get('id');
         $this->model->rawQuery("UPDATE FROM `transactions` WHERE id = '$id'");
 
-
+        //return $this->view("")
         // $this->model->rawQuery("UPDATE FROM transactions WHERE id = '$id'");
+    }
+
+    public function  insertpost(){
+        $_POST = ('id');
+        $_POST = ('keterangan');
+        $_POST = ('wash_type_name');
+        $_POST = ('total');
     }
 }

@@ -55,7 +55,7 @@
 
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif </h4>
-
+                
                     <div class='card'>
                         <div class="modal fade" id="tarif" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -73,7 +73,7 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="keterangan" class="form-label">keterangan</label>
-                                                        <textarea class="form-control" name="keterangan" id="keterangan" rows="3"></textarea>
+                                                        <textarea class="form-control" name="keterangan" id="keterangan" rows="1"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -109,7 +109,7 @@
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 </pre>
                                 <div class="table-responsive text-nowrap">
-                                    <table class="table" id="transaksiTable">
+                                    <table class="table" id="tarifTable">
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
@@ -174,7 +174,8 @@
             // $('.paginate_button.current').addClass('btn btn-primary')
             // $('.paginate_button.previous.disabled').addClass('btn btn-default')
             // $('.paginate_button.next.disabled').addClass('btn btn-default')
-        })
+
+    })
     </script>
 
 
