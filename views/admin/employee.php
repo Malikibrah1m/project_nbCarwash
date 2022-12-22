@@ -83,7 +83,8 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="dayte" class="form-label">Password</label>
-                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="1"></textarea>
+                                                        <select class="form-select" name="user_id" id="user_id" style="width: 100%">
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -106,6 +107,8 @@
                                 </button>
                             </div>
 
+                            <?php print_r( value: $user)?>
+
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
                                     <table class="table" id="tablePengeluaran">
@@ -124,22 +127,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                            <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th>
-                                        <div class="dropdown">
-                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                        <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:void(0);">
-                                                    <i class="bx bx-edit-alt me-1"></i> Edit</a >
-                                                <a class="dropdown-item" href="javascript:void(0);">
-                                                    <i class="bx bx-trash me-1"></i> Delete</a>
-                                        </div>
-                                                </th>
+                                           
                                             </tr>
                                         </tfoot>
                                     </table>
