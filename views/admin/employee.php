@@ -110,13 +110,13 @@
                                 <div class="table-responsive text-nowrap">
                                     <table class="table" id="tablePengeluaran">
                                         <thead>
-                                            <tr>
-                                                <th>ID</th>
+                                        <tr>
                                                 <th>ID</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
                                                 <th>Password</th>
                                                 <th>Aksi</th>
+                                            </tr>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -124,7 +124,22 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                            
+                                            <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>
+                                        <div class="dropdown">
+                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                        <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                    <i class="bx bx-edit-alt me-1"></i> Edit</a >
+                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                    <i class="bx bx-trash me-1"></i> Delete</a>
+                                        </div>
+                                                </th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -155,71 +170,20 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
-
             });
-            $('#spendInsertForm').validate({
-                // wrapper: "#form-input",
-                rules: {
-                    keterangan: {
-                        required: true,
-                    },
-                    total: {
-                        required: true,
-                        number: true,
-                    },
-                    daterange: {
-                        required: true,
-                        date: true,
-                    },
-
-
-                },
-                errorElement: "span",
-                errorPlacement: function(error, element) {
-                    error.addClass("invalid-feedback");
-                    // error.appendTo("#form-input");
-                    error.insertAfter(element);
-                    // Add the `help-block` class to the error element
-
-                    // if (element.prop("type") === "checkbox") {
-                    //     error.insertAfter(element.parent("label"));
-                    // } else {
-                    //     error.insertAfter(element);
-                    // }
-                },
-            });
-            loadPengeluaranTable();
+            loadrekapTable();
         })
 
-        function loadPengeluaranTable() {
-            var url = "<?= BASE_URL ?>employees/employees_data";
-            $('#tablePengeluaran').DataTable({
+        function loadrekapTable() {
+            var url = "<?= BASE_URL ?>rekap/rekap_data";
+            $('#rekapTable').DataTable({
                 searching: true,
                 paging: true,
                 destroy: true,
                 "ordering": false,
                 // serverSide: true,
                 ajax: url,
-                columnDefs: [{
-                    target: 2,
-                    visible: false,
-                }],
                 columns: [{
-                        data: null,
-                        render: function(dadta, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-                        }
-                    },
-                    {
-                        data: 'id',
-                        name: 'id',
-                        visible: false,
-                    },
-                    {
-                        data: 'nama',
-                        name: 'keterangan'
-                    },
-                    {
                         data: 'date',
                         name: 'date'
                     },
@@ -228,103 +192,24 @@
                         name: 'total'
                     },
                     {
-                        data: 'aksi',
-                        name: 'aksi',
-                        render: function(data, type, row) {
-                            return '<button onclick="hapus(' + row.id + ')" class="btn btn-icon me-2 btn-danger"><span class="tf-icons bx bx-trash"></span></button>';
-                        }
-                    }
-                ],
-                footerCallback: function(row, data, start, end, display) {
-                    var api = this.api();
-
-                    // Remove the formatting to get integer data for summation
-                    var intVal = function(i) {
-                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ?
-                            i : 0;
-                    };
-
-                    // Total over all pages
-                    total = api
-                        .column(4)
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Total over this page
-                    pageTotal = api
-                        .column(4, {
-                            page: 'current'
-                        })
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-                },
-
-            });
-        }
-
-        function hapus(data) {
-            var url = "<?= BASE_URL ?>employee/delete?id=:id";
-            // console.log(data);
-            swal({
-                title: "Anda yakin?",
-                text: "Anda yakin ingin menghapus data ini??",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then((willDelete) => {
-                // console.log(willDelete);
-                if (willDelete) {
-                    $.ajax({
-                        url: url.replace(':id', data),
-                        type: 'DELETE',
-                        cache: false,
-                        processData: false,
-                        success: (data) => {
-                            loadPengeluaranTable();
-                            swal("Success", "Data berhasil dihapus", "success");
-                            // $("#btn-save").html('Submit');
-                            // $("#btn-save"). attr("disabled", false);
-                        },
-                        error: function(data) {
-                            swal("Gagal", "Error!!", "error");
-                        }
-                    })
-                }
-
-            });
-        }
-
-        $('#spendInsertForm').submit(function(e) {
-            var form = $('#spendInsertForm');
-            if (form.valid()) {
-                console.log(form.valid());
-                e.preventDefault();
-                var formData = new FormData(this);
-                $.ajax({
-                    url: "<?= BASE_URL ?>pengeluaran/insert",
-                    type: 'POST',
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: (data) => {
-                        $('#pengeluaran').modal('hide');
-                        loadPengeluaranTable();
-                        swal("Success", "Data berhasil dimasukkan", "success");
-                        // $("#btn-save").html('Submit');
-                        // $("#btn-save"). attr("disabled", false);
+                        data: 'daytime',
+                        name: 'daytime'
                     },
-                    error: function(data) {
-                        swal("Gagal", "Data telah ada", "error");
-                    }
-                })
-            }
-
-        })
+                    {
+                        data: 'for_cash',
+                        name: 'for_cash'
+                    },
+                    {
+                        data: 'for_employee',
+                        name: 'for_employee'
+                    },
+                    {
+                        data: 'for_owner',
+                        name: 'for_owner'
+                    },
+                ],
+            });
+        }
     </script>
 </body>
 
