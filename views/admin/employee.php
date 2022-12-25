@@ -107,9 +107,9 @@
                                 </button>
                             </div>
 
-                            <?php print_r( value: $user)?>
-
-                            <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
+                          <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
+                           
+                        
                                 <div class="table-responsive text-nowrap">
                                     <table class="table" id="tablePengeluaran">
                                         <thead>
@@ -122,13 +122,69 @@
                                             </tr>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            
-                                        </tbody>
-                                        <tfoot>
+                                        <tbody class="table-border-bottom-0">
+                                        <tr>
+                                            <td><i class="fab fa-angular fa-lg text-danger me-2"></i> <strong>1</strong></td>
+                                            <td>Putra </td>
+                                            <td><i class="fab fa-angular fa-lg text-danger me-1"></i> <strong>putra12@gmail.com</strong></td>
+                                            <td>12345</td>
+                                            <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                >
+                                      
                                             <tr>
-                                           
+                                            <td><i class="fab fa-react fa-lg text-info me-2"></i> <strong>2</strong></td>
+                                            <td>Rendi</td>
+                                            <td><i class="fab fa-react fa-lg text-info me-1"></i> <strong>rendi123@gmail.com</strong></td>
+                                            <td>12345</td>
+                                            <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                >
+                                          <tr>
+                                            <td><i class="fab fa-react fa-lg text-info me-2"></i> <strong>3</strong></td>
+                                            <td>Admin</td>
+                                            <td><i class="fab fa-react fa-lg text-info me-1"></i> <strong>admin@gmail.com</strong></td>
+                                            <td>$2a$12$g9enDafQgUWtocAxEKtBTOqprzwG65jed9/iZbe1xnxVoLUJhUEF.</td>
+                                            <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                >
                                             </tr>
+
+                                            <tr>
+                                            <td><i class="fab fa-react fa-lg text-info me-2"></i> <strong>5</strong></td>
+                                            <td>Adi</td>
+                                            <td><i class="fab fa-react fa-lg text-info me-1"></i> <strong>adi@gmail.com</strong></td>
+                                            <td>$$2y$10$ZwroQb5letISjsyVzceQ0uLprQBLht5xD1NPaWB4ugv5p84EbuCQW</td>
+                                            <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                >
+                                            </tr>
+
+                                            <tfoot>
                                         </tfoot>
                                     </table>
                                 </div>

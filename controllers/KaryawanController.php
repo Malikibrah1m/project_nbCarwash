@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Arr;
-
 class KaryawanController extends BaseController
 {
     private Employee $model;
@@ -16,11 +14,9 @@ class KaryawanController extends BaseController
 
     public function getIndex()
     {
+       
         $user = new User;
-        $user = $user->where(condition: array('role'=> 'admin'), separator: '!= ')->get();
-     return $this->view(template: 'admin.employee',data: array ('user'=>$user));
-        
-    }
-    
-    
-    }
+        $user = $user->where(condition: array('role'=> 'admin'), separator: '!=')->get();
+        return $this->view(template: 'admin.employee',data: array ('user'=>$user));
+         }
+}
