@@ -91,7 +91,7 @@ if ($_ENV['ENV'] == 'development') {
         }
         $controller->$strMethodName();
     } else {
-        if ($uri[1] == "") {
+        if ($uri[1] == " " || empty($uri[1]))  {
             $indx = new IndexController();
             $indx->getIndex();
         } else {
