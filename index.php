@@ -43,35 +43,69 @@ ini_set('display_errors', 'On');
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 // print_r($uri[2]);
-if (strtolower($uri[2]) == "api") {
-    $class = ucfirst($uri[3]);
-    $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-    $targetClass = $class . 'APIController';
-    $controller = new $targetClass();
-    if (empty($uri[4])) {
-        $strMethodName = $requestMethod . 'Index';
-    } else {
-        $strMethodName = $requestMethod . ucfirst($uri[4]);
-    }
-    $controller->$strMethodName();
-} else {
-    if ($uri[2] == "") {
-        $indx = new IndexController();
-        $indx->getIndex();
-    } else {
-        $class = ucfirst($uri[2]);
+if ($_ENV['ENV'] == 'development') {
+
+    if (strtolower($uri[2]) == "api") {
+        $class = ucfirst($uri[3]);
         $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-        $targetClass = $class . 'Controller';
+        $targetClass = $class . 'APIController';
         $controller = new $targetClass();
-        if (empty($uri[3]) || $uri[3] == ' ') {
+        if (empty($uri[4])) {
             $strMethodName = $requestMethod . 'Index';
         } else {
-            $strMethodName = $requestMethod . ucfirst($uri[3]);
-            // echo $strMethodName;
+            $strMethodName = $requestMethod . ucfirst($uri[4]);
         }
         $controller->$strMethodName();
+    } else {
+        if ($uri[2] == "") {
+            $indx = new IndexController();
+            $indx->getIndex();
+        } else {
+            $class = ucfirst($uri[2]);
+            $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+            $targetClass = $class . 'Controller';
+            $controller = new $targetClass();
+            if (empty($uri[3]) || $uri[3] == ' ') {
+                $strMethodName = $requestMethod . 'Index';
+            } else {
+                $strMethodName = $requestMethod . ucfirst($uri[3]);
+                // echo $strMethodName;
+            }
+            $controller->$strMethodName();
+        }
+    }
+} else {
+    if (strtolower($uri[1]) == "api") {
+        $class = ucfirst($uri[2]);
+        $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+        $targetClass = $class . 'APIController';
+        $controller = new $targetClass();
+        if (empty($uri[3])) {
+            $strMethodName = $requestMethod . 'Index';
+        } else {
+            $strMethodName = $requestMethod . ucfirst($uri[4]);
+        }
+        $controller->$strMethodName();
+    } else {
+        if ($uri[1] == "") {
+            $indx = new IndexController();
+            $indx->getIndex();
+        } else {
+            $class = ucfirst($uri[1]);
+            $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+            $targetClass = $class . 'Controller';
+            $controller = new $targetClass();
+            if (empty($uri[2]) || $uri[2] == ' ') {
+                $strMethodName = $requestMethod . 'Index';
+            } else {
+                $strMethodName = $requestMethod . ucfirst($uri[3]);
+                // echo $strMethodName;
+            }
+            $controller->$strMethodName();
+        }
     }
 }
+
 
 
 function avatar($nama)
