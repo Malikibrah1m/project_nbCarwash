@@ -78,7 +78,7 @@ if ($_ENV['ENV'] == 'development') {
             $controller->$strMethodName();
         }
     }
-} else {
+} elseif ($_ENV['ENV'] == 'prod') {
     if (strtolower($uri[1]) == "api") {
         $class = ucfirst($uri[2]);
         $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
@@ -87,7 +87,7 @@ if ($_ENV['ENV'] == 'development') {
         if (empty($uri[3])) {
             $strMethodName = $requestMethod . 'Index';
         } else {
-            $strMethodName = $requestMethod . ucfirst($uri[4]);
+            $strMethodName = $requestMethod . ucfirst($uri[3]);
         }
         $controller->$strMethodName();
     } else {
@@ -102,7 +102,7 @@ if ($_ENV['ENV'] == 'development') {
             if (empty($uri[2]) || $uri[2] == ' ') {
                 $strMethodName = $requestMethod . 'Index';
             } else {
-                $strMethodName = $requestMethod . ucfirst($uri[3]);
+                $strMethodName = $requestMethod . ucfirst($uri[2]);
                 // echo $strMethodName;
             }
             $controller->$strMethodName();
