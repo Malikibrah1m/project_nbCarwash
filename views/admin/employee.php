@@ -54,8 +54,9 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Karyawan </h4>
 
+                        <div class="card">
                             <!-- Large Modal -->
-                            <div class="modal fade" id="pengeluaran" tabindex="-1" aria-hidden="true">
+                            <div class="modal fade" id="insert" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -67,23 +68,17 @@
 
                                             </div>
 
-                                            <form method="POST" id="spendInsertForm">
+                                            <form method="POST" id="insertEmployee">
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                        <label for="keterangan" class="form-label">Nama</label>
-                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="3"></textarea>
+                                                        <label for="nama" class="form-label">Nama</label>
+                                                        <input class="form-control" name="nama" required id="nama">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                        <label for="total" class="form-label">Email</label>
-                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="1"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="dayte" class="form-label">Password</label>
-                                                        <textarea class="form-control" name="keterangan" required id="keterangan" rows="1"></textarea>
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input class="form-control" name="email" required id="email">
                                                     </div>
                                                 </div>
 
@@ -101,16 +96,17 @@
 
                             <h5 class="card-header">Data Karyawan</h5>
                             <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
-                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pengeluaran">
+                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#insert">
                                     Tambah Data
                                 </button>
                             </div>
 
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
-                                    <table class="table" id="tablePengeluaran">
+                                    <table class="table" id="employeeTable">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>ID</th>
                                                 <th>Nama</th>
                                                 <th>Email</th>
@@ -123,55 +119,54 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                            
+
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
-                        <!--/ Card layout -->
                     </div>
-                    <!-- / Content -->
 
-                    <div class="content-backdrop fade"></div>
+                    <!--/ Card layout -->
                 </div>
-                <!-- Content wrapper -->
-            </div>
-            <!-- / Layout page -->
-        </div>
+                <!-- / Content -->
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 
     <?php require(VIEW_PATH . 'template/footer.php'); ?>
     <script>
         $(function() {
+            $.validator.addMethod("checkAlpha", function(value, element) {
+                return (new RegExp("^[a-zA-Z ]*$").test(value))
+            }, "Kolom harus diisi dengan huruf");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
 
             });
-            $('#spendInsertForm').validate({
+            $('#insertEmployee').validate({
                 // wrapper: "#form-input",
                 rules: {
-                    keterangan: {
+                    nama: {
                         required: true,
+                        checkAlpha: true,
                     },
-                    total: {
+                    email: {
                         required: true,
-                        number: true,
+                        email: true,
                     },
-                    daterange: {
-                        required: true,
-                        date: true,
-                    },
-
-
                 },
                 errorElement: "span",
                 errorPlacement: function(error, element) {
@@ -187,12 +182,12 @@
                     // }
                 },
             });
-            loadPengeluaranTable();
+            loadEmployeeTable();
         })
 
-        function loadPengeluaranTable() {
-            var url = "<?= BASE_URL ?>pengeluaran/pengeluaran_data";
-            $('#tablePengeluaran').DataTable({
+        function loadEmployeeTable() {
+            var url = "<?= BASE_URL ?>karyawan/show_data";
+            $('#employeeTable').DataTable({
                 searching: true,
                 paging: true,
                 destroy: true,
@@ -215,16 +210,19 @@
                         visible: false,
                     },
                     {
-                        data: 'keterangan',
-                        name: 'keterangan'
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        data: 'date',
-                        name: 'date'
+                        data: 'email',
+                        name: 'email'
                     },
                     {
-                        data: 'total',
-                        name: 'total'
+                        data: 'password',
+                        name: 'password',
+                        render: function(data, type, row) {
+                            return '<p>*********</p>';
+                        }
                     },
                     {
                         data: 'aksi',
@@ -269,7 +267,7 @@
         }
 
         function hapus(data) {
-            var url = "<?= BASE_URL ?>pengeluaran/delete?id=:id";
+            var url = "<?= BASE_URL ?>karyawan/delete?id=:id";
             // console.log(data);
             swal({
                 title: "Anda yakin?",
@@ -286,7 +284,7 @@
                         cache: false,
                         processData: false,
                         success: (data) => {
-                            loadPengeluaranTable();
+                            loadEmployeeTable();
                             swal("Success", "Data berhasil dihapus", "success");
                             // $("#btn-save").html('Submit');
                             // $("#btn-save"). attr("disabled", false);
@@ -300,22 +298,22 @@
             });
         }
 
-        $('#spendInsertForm').submit(function(e) {
-            var form = $('#spendInsertForm');
+        $('#insertEmployee').submit(function(e) {
+            var form = $('#insertEmployee');
             if (form.valid()) {
                 console.log(form.valid());
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
-                    url: "<?= BASE_URL ?>pengeluaran/insert",
+                    url: "<?= BASE_URL ?>karyawan/insert",
                     type: 'POST',
                     data: formData,
                     cache: false,
                     contentType: false,
                     processData: false,
                     success: (data) => {
-                        $('#pengeluaran').modal('hide');
-                        loadPengeluaranTable();
+                        $('#insert').modal('hide');
+                        loadEmployeeTable();
                         swal("Success", "Data berhasil dimasukkan", "success");
                         // $("#btn-save").html('Submit');
                         // $("#btn-save"). attr("disabled", false);

@@ -62,10 +62,9 @@
                                     <div class="d-flex align-items-end row">
                                         <div class="col-sm-7">
                                             <div class="card-body">
-                                                <h5 class="mb-4 card-title text-primary">Selamat Datang <?= $_SESSION['user']['name'] ?></h5>
-
-
-                                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                                                <h5 class="card-title text-primary">Selamat Datang <?= $_SESSION['user']['name'] ?></h5>
+                                                <p class="mb-4 fw-bold"><?=date("d - m - Y")?></p>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-sm-5 text-center text-sm-left">

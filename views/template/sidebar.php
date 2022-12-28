@@ -88,8 +88,8 @@
     </li>
 
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Master</span></li>
-    <li class="menu-item <?=getActivePage('Karyawan')?>">
-        <a href="<?=BASE_URL?>Karyawan" class="menu-link">
+    <li class="menu-item <?=getActivePage('karyawan')?>">
+        <a href="<?=BASE_URL?>karyawan" class="menu-link">
           <i class="menu-icon tf-icons bx bx-user-check" type="solid"></i>
           <div data-i18n="Analytics">Data Karyawan</div>
         </a>

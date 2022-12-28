@@ -2,13 +2,13 @@
 <script src="<?= BASE_URL.'assets/vendor/libs/popper/popper.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/js/bootstrap.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/jquery/validate/jquery.validate.js'?>"></script>
+<script src="<?= BASE_URL . 'assets/vendor/libs/jquery/validate/additional-methods.js' ?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/jquery/validate/localization/messages_id.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/datatable/datatables/jquery.dataTables.min.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/datatable/datatables/dataTables.bootstrap5.min.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/select2/select2.full.min.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/sweet-alert/sweetalert.min.js'?>"></script>
-
 <script src="<?= BASE_URL.'assets/vendor/libs/apex-charts/apexcharts.js' ?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/datepicker/date-picker/datepicker.js' ?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/datepicker/date-picker/datepicker.en.js' ?>"></script>
