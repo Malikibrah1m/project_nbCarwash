@@ -1,35 +1,55 @@
 <?php
 
-class TarifController extends BaseController
-{
-    private Transaksi $model;
+use Carbon\Carbon;
 
-    public function __construct()
-    {
+class TarifController extends BaseController{
+
+    private $tarif;
+    public function __construct() {
         session_start();
-        $this->model = new Transaksi();
+        $this->tarif = new Tarif;
+        if (!$_SESSION['user']) {
+            return header("location: ".BASE_URL);
+        }
     }
 
     public function getIndex()
     {
-        $data = $this->model->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id")->get();
-
-        return $this->view('admin.tarif', ['transaksi' => $data]);
+        return $this->view('admin.tarif');
     }
-    
+
+    public function getShow_data()
+    {
+        header('Content-Type: application/json');
+        $tarif = $this->tarif->all();
+        $data = [];
+        if ($tarif->num_rows > 0) {
+            while ($row = $tarif->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        // print_r($data);
+        echo json_encode(array('data' => $data));
+    }
+
     public function getEdit()
     {
         $id = $this->get('id');
-        $this->model->rawQuery("UPDATE FROM `transactions` WHERE id = '$id'");
-
-        //return $this->view("")
-        // $this->model->rawQuery("UPDATE FROM transactions WHERE id = '$id'");
+        $tarif = $this->tarif->where(array('id'=>$id))->get();
+        // $data = [];
+        if ($tarif->num_rows > 0) {
+            while ($row = $tarif->fetch_assoc()) {
+                $data = $row;
+            }
+        }
+        echo json_encode($data);
     }
 
-    public function  insertpost(){
-        $_POST = ('id');
-        $_POST = ('keterangan');
-        $_POST = ('wash_type_name');
-        $_POST = ('total');
+    public function postUpdate()
+    {
+        $id = $this->get('id');
+        $timestamp = Carbon::now()->toDateTimeString();
+        $harga = $this->post('price');
+        $this->tarif->rawQuery("UPDATE `wash_types` SET `price`='$harga',`updated_at`='$timestamp' WHERE id = '$id'")->get();
     }
 }

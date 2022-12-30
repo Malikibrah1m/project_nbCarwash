@@ -48,94 +48,65 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-
                 <div class="content-wrapper">
 
                     <!-- Content -->
-
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Tarif </h4>
-                
-                    <div class='card'>
-                        <div class="modal fade" id="tarif" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel3">Edit Tarif</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="col-md-12" id="showAlert">
-
-                                            </div>
-
-                                            <form method="POST" id="spendInsertForm">
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="keterangan" class="form-label">keterangan</label>
-                                                        <textarea class="form-control" name="keterangan" id="keterangan" rows="1"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="jenis_pencucian" class="form-label">Jenis Pencucian</label>
-                                                        <input type="text" id="jenis_pencucian" name="jenis_pencucian" class="form-control" />
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="harga" class="form-label">Harga</label>
-                                                        <input type="text" id="harga" name="harga" class="form-control" />
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                                Close
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                        </form>
+                        <!-- Content -->
+                        <!-- Large Modal -->
+                        <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel3">Edit Tarif</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
+                                    <div class="modal-body">
+                                        <form method="POST" id="updateForm">
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <label for="priceBefore" class="form-label">Harga Semula</label>
+                                                    <input type="text" id="priceBefore" name="priceBefore" class="form-control" readonly disabled />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <label for="price" class="form-label">Harga</label>
+                                                    <input type="text" id="price" name="price" class="form-control" />
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="card">
                             <h5 class="card-header">Data Tarif</h5>
-
+                            <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
+                            </div>
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
-                                </pre>
                                 <div class="table-responsive text-nowrap">
-                                    <table class="table" id="tarifTable">
+
+                                    <table class="table" id="tableTarif">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
+                                                <th>ID</th>
+                                                <th>id</th>
                                                 <th>keterangan</th>
-                                                <th>Jenis Pencucian</th>
+                                                <th>Jenis Kendaraan</th>
                                                 <th>Harga</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $no = 1;
-                                            while ($item = mysqli_fetch_array($transaksi)) :
-                                            ?>
-                                                <tr>
-                                                    <td><?= $no++ ?></td>
-                                                    <td><?= $item['merk_model'] ?></td>
-                                                    <td><?= $item['wash_type_name'] ?></td>
-                                                    <td><?= $item['total'] ?></td>
-                                                    <td>
-                                                        <button data-bs-toggle="modal" data-bs-target="#tarif" type="button" class="btn btn-primary">
-                                                            Edit
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            <?php endwhile ?>
+
                                         </tbody>
 
                                     </table>
@@ -143,14 +114,10 @@
                             </div>
                         </div>
 
-                        <!-- Content -->
-                        <!-- isi card -->
-
                         <!--/ Card layout -->
                     </div>
 
                     <!-- / Content -->
-
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->
@@ -161,24 +128,103 @@
         <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-
     <!-- / Layout wrapper -->
 
     <?php require(VIEW_PATH . 'template/footer.php'); ?>
-
     <script>
-        $(document).ready(function() {
-            $('#transakasiTable').DataTable({
-                "bFilter": false,
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
             });
-            // $('.paginate_button.current').addClass('btn btn-primary')
-            // $('.paginate_button.previous.disabled').addClass('btn btn-default')
-            // $('.paginate_button.next.disabled').addClass('btn btn-default')
+            loadTarif();
+        })
 
-    })
+        function loadTarif() {
+            var url = "<?= BASE_URL ?>tarif/show_data";
+            $('#tableTarif').DataTable({
+                searching: true,
+                paging: true,
+                destroy: true,
+                "ordering": false,
+                // serverSide: true,
+                ajax: url,
+                columnDefs: [{
+                    target: 2,
+                    visible: false,
+                }],
+                columns: [{
+                        data: null,
+                        render: function(dadta, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        data: 'id',
+                        name: 'id',
+                        visible: false,
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        render: function(data, type, row) {
+                            return '<button onclick="edit(' + row.id + ')" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
+                        }
+                    }
+                ],
+            });
+        }
+
+        function edit(id) {
+            var url = "<?=BASE_URL?>tarif/edit?id=:id"
+            $.ajax({
+                url: url.replace(':id', id),
+                success: function(res) {
+                    $('#priceBefore').val(res.price);
+                    $('#updateModal').modal('show');
+                },
+                dataType: 'json',
+            });
+            $('#updateForm').submit(function(e) {
+                var url = "<?=BASE_URL?>tarif/update?id=:id"
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: url.replace(':id', id),
+                    type: 'POST',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        $('#updateModal').modal('hide');
+                        // var oTable = $('#tableTarif').dataTable();
+                        // oTable.fnDraw(false);
+                        swal("Success", "Tarif harga berhasil diubah", "success");
+                        loadTarif();
+                        // $("#btn-save").html('Submit');
+                        // $("#btn-save"). attr("disabled", false);
+                    },
+                })
+            })
+        }
     </script>
-
-
 </body>
 
 </html>
