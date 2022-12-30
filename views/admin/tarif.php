@@ -198,8 +198,8 @@
                 },
                 dataType: 'json',
             });
-            $('#rateUpdateForm').submit(function(e) {
-                var url = "http://nb-carwash.id/admin/tarif/update/:id"
+            $('#updateForm').submit(function(e) {
+                var url = "<?=BASE_URL?>tarif/update?id=:id"
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -213,10 +213,11 @@
                     contentType: false,
                     processData: false,
                     success: (data) => {
-                        $('#editTransaction').modal('hide');
-                        var oTable = $('#rateTable').dataTable();
-                        oTable.fnDraw(false);
+                        $('#updateModal').modal('hide');
+                        // var oTable = $('#tableTarif').dataTable();
+                        // oTable.fnDraw(false);
                         swal("Success", "Tarif harga berhasil diubah", "success");
+                        loadTarif();
                         // $("#btn-save").html('Submit');
                         // $("#btn-save"). attr("disabled", false);
                     },

@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class TarifController extends BaseController{
 
     private $tarif;
@@ -41,5 +43,13 @@ class TarifController extends BaseController{
             }
         }
         echo json_encode($data);
+    }
+
+    public function postUpdate()
+    {
+        $id = $this->get('id');
+        $timestamp = Carbon::now()->toDateTimeString();
+        $harga = $this->post('price');
+        $this->tarif->rawQuery("UPDATE `wash_types` SET `price`='$harga',`updated_at`='$timestamp' WHERE id = '$id'")->get();
     }
 }
