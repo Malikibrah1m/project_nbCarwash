@@ -70,14 +70,14 @@
                                                 <th>Tipe pencucian</th>
                                                 <th>Plat Nomor</th>
                                                 <th>Merk Kendaraan</th>
-                                                <th>waktu</th>
-                                                <th>Tanggal</th>
+                                                <th>Waktu</th>
                                                 <th>Total harga</th>
+                                                <th>Tanggal</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+
                                         </tbody>
                                     </table>
                                 </div>

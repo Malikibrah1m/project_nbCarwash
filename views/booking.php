@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div style="width:800px; margin:0 auto; padding-top: 2rem;">
+    <div style="margin:0 auto; padding-top: 2rem; ">
         <div class="card">
             <div class="card-body">
                 <div class="container">
