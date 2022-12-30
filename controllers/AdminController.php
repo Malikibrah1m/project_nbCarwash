@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class AdminController extends BaseController
 {
@@ -17,9 +18,16 @@ class AdminController extends BaseController
     }
     public function getIndex()
     { 
+        $profit = new Profit();
+        $now = CarbonImmutable::now();
         $year = Carbon::now()->format('Y');
         $month = Carbon::now()->format('m');
-        $profit = new Profit();
+        $weekStartDate = $now->startOfWeek()->subDays(1);
+        $weekEndDate = $now->endOfWeek();
+        $kas = $profit->rawQuery("SELECT sum(for_cash) as kas FROM `profits` where `date` >= '$weekStartDate' && `date` <= '$weekEndDate'")->get();
+        $owner = $profit->rawQuery("SELECT sum(for_owner) as owner FROM `profits` where `date` >= '$weekStartDate' && `date` <= '$weekEndDate'")->get();
+    
+        $kasPerbulan = $profit->rawQuery("select sum(for_cash) as totalKasPerBulan from profits where month(date) = $month && year(date) = $year")->get();
         $profitPerBulan = $profit->rawQuery("select sum(for_owner) as totalPerBulan from profits where month(date) = $month && year(date) = $year")->get();
         $profitPerTahun = $profit->rawQuery("select sum(for_owner) as totalPerTahun from profits where year(date) = $year")->get();
         while ($row = $profitPerBulan->fetch_assoc()) {
@@ -27,6 +35,15 @@ class AdminController extends BaseController
         }
         while ($row = $profitPerTahun->fetch_assoc()) {
             $data['profitPerTahun'] = $row['totalPerTahun'];
+        }
+        while ($row = $kasPerbulan->fetch_assoc()) {
+            $data['kasPerbulan'] = $row['totalKasPerBulan'];
+        }
+        while ($row = $kas->fetch_assoc()) {
+            $data['KasPerMinggu'] = $row['kas'];
+        }
+        while ($row = $owner->fetch_assoc()) {
+            $data['OwnerPerMinggu'] = $row['owner'];
         }
         // $data 
         // print_r($data);

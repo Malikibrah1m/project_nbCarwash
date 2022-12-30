@@ -5,7 +5,7 @@
 <link rel="icon" type="image/x-icon" href="<?= BASE_URL . 'assets/img/favicon/favicon.ico' ?>" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet" href="<?= BASE_URL . 'assets/vendor/fonts/boxicons.css' ?>" />
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
 <link rel="stylesheet" href="<?= BASE_URL . 'assets/vendor/libs/datepicker/date-picker.css' ?>">
 
 <!-- Core CSS -->

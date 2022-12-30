@@ -119,7 +119,7 @@
                                                     </div>
                                                 </div>
                                                 <span>Kas Per-Minggu</span>
-                                                <h3 class="card-title text-nowrap mb-1">$4,679</h3>
+                                                <h5 class="card-title text-nowrap mb-1">Rp. <?=number_format($data['kasPerMinggu'])?></h5>
                                                 <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> -->
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                                     </div>
                                                 </div>
                                                 <span class="d-block mb-1">Kas Per-Bulan</span>
-                                                <h3 class="card-title text-nowrap mb-2">$2,456</h3>
+                                                <h5 class="card-title text-nowrap mb-2">Rp.<?=number_format($data['totalKasPerBulan'])?></h5>
                                                 <!-- <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small> -->
                                             </div>
                                         </div>
@@ -181,8 +181,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span class="fw-semibold d-block mb-1">Transactions</span>
-                                                <h3 class="card-title mb-2">$14,857</h3>
+                                                <span class="d-block mb-1">Keuntungan Per-Minggu</span>
+                                                <h5 class="card-title mb-2">Rp.<?=number_format($data['OwnerPerMinggu'])?></h5>
                                                 <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small> -->
                                             </div>
                                         </div>
