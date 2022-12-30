@@ -24,7 +24,7 @@ class TransaksiAPIController extends ApiController
         try {
             JWT::decode($token,  new Key($_ENV['ACCESS_TOKEN_SECRET'], 'HS256'));
             $json = file_get_contents('php://input');
-            $input = json_decode($json);
+            $input = json_decode($json,true);
             try {
                 $date = Carbon::now()->format('Y-m-d');
                 $time = Carbon::now()->format('H:i');
@@ -37,6 +37,7 @@ class TransaksiAPIController extends ApiController
                 $total = $input['total'];
                 $id = $date . '-' . str_replace('_', ' ', strtolower($name)) . '-' . $time;
                 $this->trans->rawQuery("INSERT INTO `transactions`(`id`, `name`, `plate_number`, `no_hp`, `merk_model`, `wash_type_id`, `time`, `total`, `date`) VALUES ('$id','$name','$plate_number','$no_hp','$merk_model','$wash_type_id','$time','$total]','$date')")->get();
+                $this->succesResponse('',"Transaksi berhasil di daata");
                 new Exception("Oppsss.. ada error");
             } catch (Exception $e) {
                 $this->errorResponse($e->getMessage(), 401);
