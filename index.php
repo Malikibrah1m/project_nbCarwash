@@ -122,8 +122,17 @@ function getActivePage($nama_page)
 {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $uri = explode('/', $uri);
-    if ($uri[2] == $nama_page) {
-        return "active";
+    if ($_ENV['ENV'] == 'prod') {
+        if ($uri[1] == $nama_page) {
+            return "active";
+        }
+        return "";
+    } else if($_ENV['ENV'] == 'development') {
+        if ($uri[2] == $nama_page) {
+            return "active";
+        }
+        return "";
     }
-    return "";
+    
+    
 }

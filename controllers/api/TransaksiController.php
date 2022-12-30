@@ -29,7 +29,6 @@ class TransaksiAPIController extends ApiController
                 $date = Carbon::now()->format('Y-m-d');
                 $time = Carbon::now()->format('H:i');
                 $name = $input['name'];
-                $time = $input['time'];
                 $no_hp = $input['no_hp'];
                 $wash_type_id = $input['wash_type_id'];
                 $merk_model = $input['merk_model'];
