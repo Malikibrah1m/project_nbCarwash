@@ -22,9 +22,11 @@ class AkunController extends BaseController
         $email = $this->post('email');
         $pass = password_hash($this->post('password'),PASSWORD_BCRYPT);
         $id = $this->post('id');
-        if ($pass == '') {
+        if ($this->post('password') == '' || empty($this->post('password'))) {
+            // echo  'true';
             $result = $user->rawQuery("UPDATE `users` SET `email`='$email',`updated_at`='$timestamp' WHERE id = '$id'")->get();
         } else {
+            // echo 'false';
             $result = $user->rawQuery("UPDATE `users` SET `email`='$email', `password`='$pass',`updated_at`='$timestamp' WHERE id = '$id'")->get();
         }
         return header("location: " . BASE_URL);
