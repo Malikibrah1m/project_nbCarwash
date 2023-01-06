@@ -234,6 +234,8 @@ class ComposerStaticInit7671f226ce6ee0b9b78e939a92cac1a9
         'RekapController' => __DIR__ . '/../..' . '/controllers/RekapController.php',
         'Request' => __DIR__ . '/../..' . '/traits/Request.php',
         'ReservasiController' => __DIR__ . '/../..' . '/controllers/ReservasiController.php',
+        'Sesi' => __DIR__ . '/../..' . '/models/Sesi.php',
+        'SesiController' => __DIR__ . '/../..' . '/controllers/SesiController.php',
         'Spend' => __DIR__ . '/../..' . '/models/Spend.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
         'Tarif' => __DIR__ . '/../..' . '/models/Tarif.php',

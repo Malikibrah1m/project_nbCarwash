@@ -5,7 +5,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class RekapController extends BaseController
 {
-    private $profit;
+    private $trans;
     public function __construct()
     {
         session_start();
@@ -13,8 +13,8 @@ class RekapController extends BaseController
         if (!$_SESSION['user']) {
             return header("location: ".BASE_URL);
         }
-        $profit = new Profit();
-        $this->profit = $profit;
+        $trans = new Transaksi();
+        $this->trans = $trans;
     }
     public function getIndex()
     {
@@ -25,7 +25,7 @@ class RekapController extends BaseController
     {
         header('Content-Type: application/json');
 
-        $rekap = $this->profit->all();
+        $rekap = $this->trans->all();
         $data = [];
         if ($rekap->num_rows > 0) {
             while ($row = $rekap->fetch_assoc()) {
@@ -43,27 +43,26 @@ class RekapController extends BaseController
         $date = $this->post('date');
         if ($date) {
             $dateArr = explode(' - ', $date);
-            $rekap = $this->profit->rawQuery("SELECT * FROM `profits` where `date` >= '$dateArr[0]' && `date` <= '$dateArr[1]' ")->get();
-            $nama_file = "Data Keuntungan_$dateArr[0]_$dateArr[1]";
+            $rekap = $this->trans->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id where `date` >= '$dateArr[0]' && `date` <= '$dateArr[1]' ")->get();
+            $nama_file = "Data Transaksi_$dateArr[0]_$dateArr[1]";
         } else {
-            $rekap = $this->profit->all();
-            $nama_file = "Data Keuntungan";
+            $rekap = $this->trans->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id")->get();
+            $nama_file = "Data Transaksi";
         }
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', "DATA KEUNTUNGAN"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $sheet->setCellValue('A1', "DATA TRANSAKSI"); // Set kolom A1 dengan tulisan "DATA SISWA"
         $sheet->mergeCells('A1:F1'); // Set Merge Cell pada kolom A1 sampai F1
         $sheet->getStyle('A1')->getFont()->setBold(true); // Set bold kolom A1
         $sheet->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
         // Buat header tabel nya pada baris ke 3
         $sheet->setCellValue('A3', "NO");
         $sheet->setCellValue('B3', "TANGGAL");
-        $sheet->setCellValue('C3', "TOTAL");
-        $sheet->setCellValue('D3', "WAKTU");
-        $sheet->setCellValue('E3', "KARYAWAN");
-        $sheet->setCellValue('F3', "KAS");
-        $sheet->setCellValue('G3', "OWNER");
+        $sheet->setCellValue('C3', "NAMA");
+        $sheet->setCellValue('D3', "TIPE PENCUCIAN");
+        $sheet->setCellValue('E3', "NO HP");
+        $sheet->setCellValue('F3', "JAM");
 
         $sheet->getStyle('A3');
         $sheet->getStyle('B3');
@@ -81,11 +80,10 @@ class RekapController extends BaseController
         while ($data = mysqli_fetch_array($rekap)) { // Ambil semua data dari hasil eksekusi $sql
             $sheet->setCellValue('A' . $row, $no);
             $sheet->setCellValue('B' . $row, $data['date']);
-            $sheet->setCellValue('C' . $row, $data['total']);
-            $sheet->setCellValue('D' . $row, $data['daytime']);
-            $sheet->setCellValue('E' . $row, $data['for_employee']);
-            $sheet->setCellValue('F' . $row, $data['for_cash']);
-            $sheet->setCellValue('G' . $row, $data['for_owner']);
+            $sheet->setCellValue('C' . $row, $data['wash_type_name']);
+            $sheet->setCellValue('D' . $row, $data['name']);
+            $sheet->setCellValue('E' . $row, $data['no_hp']);
+            $sheet->setCellValue('F' . $row, $data['time']);
             $sheet->getStyle('A' . $row);
             $sheet->getStyle('B' . $row);
             $sheet->getStyle('C' . $row);

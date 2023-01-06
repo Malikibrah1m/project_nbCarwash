@@ -46,4 +46,5 @@ class TransaksiAPIController extends ApiController
             $this->errorResponse($e->getMessage(), 401);
         }
     }
+    
 }

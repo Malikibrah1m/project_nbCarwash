@@ -24,6 +24,8 @@ class AdminController extends BaseController
         $month = Carbon::now()->format('m');
         $weekStartDate = $now->startOfWeek()->subDays(1);
         $weekEndDate = $now->endOfWeek();
+        // echo $weekStartDate;
+
         $kas = $profit->rawQuery("SELECT sum(for_cash) as kas FROM `profits` where `date` >= '$weekStartDate' && `date` <= '$weekEndDate'")->get();
         $owner = $profit->rawQuery("SELECT sum(for_owner) as owner FROM `profits` where `date` >= '$weekStartDate' && `date` <= '$weekEndDate'")->get();
     
@@ -48,6 +50,7 @@ class AdminController extends BaseController
         // $data 
         // print_r($data);
 
+        // echo($data['profitPerTahun']);
         return $this->view('admin.index',$data);
     }
 

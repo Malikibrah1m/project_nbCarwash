@@ -116,7 +116,7 @@
             var url = "<?= BASE_URL ?>transaksi/data_trans";
             $('#transaksiTable').DataTable({
                 "language": {
-                    "emptyTable": "Reservasi kosong",
+                    "emptyTable": "Transaksi kosong",
                 },
                 searching: false,
                 destroy: true,

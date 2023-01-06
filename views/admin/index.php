@@ -119,7 +119,7 @@
                                                     </div>
                                                 </div>
                                                 <span>Kas Per-Minggu</span>
-                                                <h5 class="card-title text-nowrap mb-1">Rp. <?=number_format($data['kasPerMinggu'])?></h5>
+                                                <h5 class="card-title text-nowrap mb-1">Rp. <?=number_format($data['KasPerMinggu'])?></h5>
                                                 <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> -->
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                                     </div>
                                                 </div>
                                                 <span class="d-block mb-1">Kas Per-Bulan</span>
-                                                <h5 class="card-title text-nowrap mb-2">Rp.<?=number_format($data['totalKasPerBulan'])?></h5>
+                                                <h5 class="card-title text-nowrap mb-2">Rp.<?=number_format($data['kasPerbulan'])?></h5>
                                                 <!-- <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small> -->
                                             </div>
                                         </div>
@@ -181,7 +181,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span class="d-block mb-1">Keuntungan Per-Minggu</span>
+                                                <span class="d-block mb-1">Profit Per-Minggu</span>
                                                 <h5 class="card-title mb-2">Rp.<?=number_format($data['OwnerPerMinggu'])?></h5>
                                                 <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small> -->
                                             </div>
@@ -193,7 +193,7 @@
                                                 <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
                                                     <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                                         <div class="card-title">
-                                                            <h5 class="text-nowrap mb-2">Profile Report</h5>
+                                                            <h5 class="text-nowrap mb-2">Profit Per Tahun</h5>
                                                             <span class="badge bg-label-warning rounded-pill"><?= Carbon\Carbon::now()->format('Y') ?></span>
                                                         </div>
                                                         <div class="mt-sm-auto">

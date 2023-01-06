@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<?= BASE_URL . 'assets/vendor/css/core.css' ?>" />
 <link rel="stylesheet" href="<?= BASE_URL . 'assets/vendor/css/theme-default.css' ?>" />
 <link rel="stylesheet" href="<?= BASE_URL . 'assets/css/demo.css' ?>" />
-
+<link rel="stylesheet" href="<?= BASE_URL .'assets/vendor/libs/bootstrap-timepicker/css/bootstrap-timepicker.min.css'?>">
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="<?= BASE_URL . 'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' ?>" />
 <link rel="stylesheet" href="<?= BASE_URL . 'assets/vendor/libs/datatable/datatables/dataTables.bootstrap5.min.css'?>" />
