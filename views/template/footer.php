@@ -2,6 +2,7 @@
 <script src="<?= BASE_URL.'assets/vendor/libs/popper/popper.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/js/bootstrap.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/jquery/validate/jquery.validate.js'?>"></script>
+<script src="<?= BASE_URL .'assets/vendor/libs/bootstrap-timepicker/js/bootstrap-timepicker.min.js'?>"></script>
 <script src="<?= BASE_URL . 'assets/vendor/libs/jquery/validate/additional-methods.js' ?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/jquery/validate/localization/messages_id.js'?>"></script>
 <script src="<?= BASE_URL.'assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js'?>"></script>

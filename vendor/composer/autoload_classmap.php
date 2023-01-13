@@ -34,6 +34,8 @@ return array(
     'RekapController' => $baseDir . '/controllers/RekapController.php',
     'Request' => $baseDir . '/traits/Request.php',
     'ReservasiController' => $baseDir . '/controllers/ReservasiController.php',
+    'Sesi' => $baseDir . '/models/Sesi.php',
+    'SesiController' => $baseDir . '/controllers/SesiController.php',
     'Spend' => $baseDir . '/models/Spend.php',
     'Stringable' => $vendorDir . '/myclabs/php-enum/stubs/Stringable.php',
     'Tarif' => $baseDir . '/models/Tarif.php',

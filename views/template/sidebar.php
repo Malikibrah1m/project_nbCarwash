@@ -42,8 +42,8 @@
         <div data-i18n="Analytics">Reservasi</div>
       </a>
     </li>
-    <li class="menu-item {{ Route::currentRouteName() == 'admin.rate.index' ? 'active' : ''}}">
-      <a href="<?= BASE_URL ?>tarif" class="menu-link">
+    <li class="menu-item  <?= getActivePage('tarif') ?>">
+      <a href="<?= BASE_URL ?>tarif" class="menu-link"> 
         <i class="menu-icon tf-icons bx bx-food-menu"></i>
         <div data-i18n="Analytics">Tarif</div>
       </a>
@@ -62,14 +62,13 @@
           <i class="menu-icon tf-icons bx bx-user-check" type="solid"></i>
           <div data-i18n="Analytics">Data Karyawan</div>
         </a>
-      </li>
-      <!-- <li class="menu-item {{ Route::currentRouteName() == 'admin.employee.index' ? 'active' : ''}}">
-      <a href="{{route('admin.employee.index')}}" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-user-check" type="solid"></i>
-        <div data-i18n="Analytics">Data Karyawan</div>
-      </a>
-    </li> -->
-
+    </li>
+    <li class="menu-item <?=getActivePage('sesi')?>">
+        <a href="<?=BASE_URL?>sesi" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-calendar" type="solid"></i>
+          <div data-i18n="Analytics">Data Sesi</div>
+        </a>
+    </li>
     <li class="menu-item <?= getActivePage('rekap') ?>">
       <a href="<?= BASE_URL ?>rekap" class="menu-link">
         <i class="menu-icon tf-icons bx bx-book-open" type="solid"></i>

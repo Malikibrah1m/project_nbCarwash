@@ -71,30 +71,24 @@
                             </div>
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                                 <div class="table-responsive text-nowrap">
-                                    <table class="table" id="rekapTable">
+                                <table class="table" id="transaksiTable">
                                         <thead>
                                             <tr>
-                                                <th>Tanggal</th>
-                                                <th>Total</th>
+                                                <th>No.</th>
+                                                <th>id</th>
+                                                <th>Nama</th>
+                                                <th>No. Hp</th>
+                                                <th>Tipe pencucian</th>
+                                                <th>Plat Nomor</th>
+                                                <th>Merk Kendaraan</th>
                                                 <th>Waktu</th>
-                                                <th>Kas</th>
-                                                <th>Karyawan</th>
-                                                <th>Pemilik</th>
+                                                <th>Total harga</th>
+                                                <th>Tanggal</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Total:</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -128,70 +122,60 @@
         })
 
         function loadrekapTable() {
-            var url = "<?= BASE_URL ?>rekap/rekap_data";
-            $('#rekapTable').DataTable({
-                searching: true,
-                paging: true,
+            var url = "<?= BASE_URL ?>transaksi/all_dataTrans";
+            $('#transaksiTable').DataTable({
+                "language": {
+                    "emptyTable": "Transaksi kosong",
+                },
+                searching: false,
                 destroy: true,
                 "ordering": false,
-                // serverSide: true,
                 ajax: url,
                 columns: [{
-                        data: 'date',
-                        name: 'date'
+                        data: null,
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        data: 'id',
+                        name: 'id',
+                        visible: false
+                    },
+                    {
+                        data: 'name',
+                        name: 'name',
+                    },
+                    {
+                        data: 'no_hp',
+                        name: 'no_hp'
+                    },
+                    {
+                        data: 'wash_type_name',
+                        name: 'wash_type_name'
+                    },
+                    {
+                        data: 'plate_number',
+                        name: 'plate_number'
+                    },
+                    {
+                        data: 'merk_model',
+                        name: 'merk_model'
+                    },
+                    {
+                        data: 'time',
+                        name: 'time'
                     },
                     {
                         data: 'total',
                         name: 'total'
                     },
                     {
-                        data: 'daytime',
-                        name: 'daytime'
+                        data: 'date',
+                        name: 'date'
                     },
-                    {
-                        data: 'for_cash',
-                        name: 'for_cash'
-                    },
-                    {
-                        data: 'for_employee',
-                        name: 'for_employee'
-                    },
-                    {
-                        data: 'for_owner',
-                        name: 'for_owner'
-                    },
+                    
                 ],
-                footerCallback: function(row, data, start, end, display) {
-                    var api = this.api();
-
-                    // Remove the formatting to get integer data for summation
-                    var intVal = function(i) {
-                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ?
-                            i : 0;
-                    };
-
-                    // Total over all pages
-                    total = api
-                        .column(1)
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Total over this page
-                    pageTotal = api
-                        .column(1, {
-                            page: 'current'
-                        })
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Update footer
-                    $(api.column(1).footer()).html('Rp. ' + total);
-                },
-
             });
         }
     </script>

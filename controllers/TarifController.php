@@ -21,7 +21,7 @@ class TarifController extends BaseController{
     public function getShow_data()
     {
         header('Content-Type: application/json');
-        $tarif = $this->tarif->all();
+        $tarif = $this->tarif->where(array('type'=>'Karpet'),'!=')->get();
         $data = [];
         if ($tarif->num_rows > 0) {
             while ($row = $tarif->fetch_assoc()) {

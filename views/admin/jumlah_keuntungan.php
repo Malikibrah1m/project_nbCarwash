@@ -53,6 +53,7 @@
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard /</span> Profit</h4>
                         <div class="card">
 
+                            <p><?php print_r($data['sesi']) ?></p>
                             <!-- Large Modal -->
                             <div class="modal fade" id="profitDetail" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -66,12 +67,15 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="daytime" class="form-label">Waktu</label>
-                                                        <select class="form-select" id="daytime" name="daytime">
-                                                            <option value="Sesi 1">Sesi 1 (08:00 -> 11:00)</option>
-                                                            <option value="Sesi 2">Sesi 2 (11:00 -> 16:00)</option>
-                                                            <option value="Sesi 3">Sesi 3 (14:00 -> 16:00)</option>
-                                                            <option value="Sesi 4">Sesi 4 (16:00 -> 19:00)</option>
-                                                            <option value="Sesi 5">Sesi 5 (19:00 -> 22:00)</option>
+                                                        <select class="form-select" name="daytime">
+                                                            <?php
+                                                            while ($row = $dataSesi->fetch_assoc()) {
+                                                            ?>
+                                                                <option value="<?= $row['id'] ?>"><?= $row['keterangan'] ?></option>
+
+                                                            <?php
+                                                            } 
+                                                            ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -100,12 +104,14 @@
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="daytime" class="form-label">Waktu</label>
-                                                        <select class="form-select" id="daytime" name="daytime">
-                                                            <option value="Sesi 1">Sesi 1 (08:00 -> 11:00)</option>
-                                                            <option value="Sesi 2">Sesi 2 (11:00 -> 16:00)</option>
-                                                            <option value="Sesi 3">Sesi 3 (14:00 -> 16:00)</option>
-                                                            <option value="Sesi 4">Sesi 4 (16:00 -> 19:00)</option>
-                                                            <option value="Sesi 5">Sesi 5 (19:00 -> 22:00)</option>
+                                                        <select class="form-select" name="daytime">
+                                                            <?php
+                                                            while ($row2 = $dataSesi2->fetch_assoc()) {
+                                                            ?>
+                                                                <option value="<?= $row2['id'] ?>"><?= $row2['keterangan'] ?></option>
+
+                                                            <?php
+                                                            } ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -180,7 +186,7 @@
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem; width: 100%;">
 
                                 <div class="col-md-5" style=" padding-bottom: 2rem;">
-                                    <button class="btn btn-info" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#insertSchedule">Tambah Jadwal </button>
+                                    <button class="btn btn-info" id="tambahJadwal" data-bs-toggle="modal" data-bs-target="#insertSchedule">Tambah Jadwal </button>
                                 </div>
                                 <div class="table-responsive text-nowrap">
                                     <table class="table" id="totalFee">
@@ -242,6 +248,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
             });
+            $('#tambahJadwal').attr('disabled',true);
             $('#btnTotalFee').attr('disabled', true);
             $('#date').evoCalendar({
                 sidebarToggler: true,
@@ -256,6 +263,7 @@
             $('#date').on('selectDate', function(a, b) {
                 var selectedDate = a.target.evoCalendar.$active.date;
                 var url = "<?= BASE_URL ?>keuntungan/selected_date?date=:date";
+                $('#tambahJadwal').attr('disabled',false);
                 $('#selectedScheduleDate').text(selectedDate)
                 $('[data-date="dateInput"]').val(selectedDate)
 
@@ -273,7 +281,7 @@
                             $('#btnTotalFee').attr('disabled', true);
                         }
                         // $('#btnTotalFee').attr('disabled', false);
-                        
+
                     },
                     error: function(res, xhr) {
                         $('#totalFee tbody').empty();
@@ -401,8 +409,8 @@
                         name: 'total'
                     },
                     {
-                        data: 'daytime',
-                        name: 'daytime'
+                        data: 'keterangan',
+                        name: 'keterangan'
                     },
                     {
                         data: 'for_cash',
@@ -476,73 +484,43 @@
                         name: 'name'
                     },
                     {
-                        data: 'time',
-                        name: 'time'
+                        data: 'keterangan',
+                        name: 'keterangan'
                     },
                     {
                         data: 'total_fee',
                         name: 'total_fee'
                     },
                 ],
-                footerCallback: function(row, data, start, end, display) {
-                    var api = this.api();
-
-                    // Remove the formatting to get integer data for summation
-                    var intVal = function(i) {
-                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ?
-                            i : 0;
-                    };
-
-                    // Total over all pages
-                    total = api
-                        .column(4)
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Total over this page
-                    pageTotal = api
-                        .column(4, {
-                            page: 'current'
-                        })
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Update footer
-                    $(api.column(1).footer()).html('Rp. ' + total);
-                },
 
             })
         }
 
         $('#countFee').submit(function(e) {
-        e.preventDefault();
-        var selectedDate = $('#dateInput').val();
-        var formData = new FormData(this);
-        $.ajax({
-            url: "<?= BASE_URL ?>keuntungan/total_fee",
-            type: 'POST',
-            data: formData,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            },
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: (data) => {
-                loadFeeTable(selectedDate);
-                // swal("Success", "Jadwal berhasil dimasukkan", "success");
-                // $("#btn-save").html('Submit');
-                // $("#btn-save"). attr("disabled", false);
-            },
-            error: function(data) {
-                console.log(data);
-            }
+            e.preventDefault();
+            var selectedDate = $('#dateInput').val();
+            var formData = new FormData(this);
+            $.ajax({
+                url: "<?= BASE_URL ?>keuntungan/total_fee",
+                type: 'POST',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    loadFeeTable(selectedDate);
+                    // swal("Success", "Jadwal berhasil dimasukkan", "success");
+                    // $("#btn-save").html('Submit');
+                    // $("#btn-save"). attr("disabled", false);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            })
         })
-    })
     </script>
 </body>
 
