@@ -2,7 +2,7 @@
 
 class TransaksiController extends BaseController
 {
-    private Transaksi $model;
+    private $model;
 
     public function __construct()
     {
@@ -27,7 +27,12 @@ class TransaksiController extends BaseController
     public function getData_trans()
     {
         $now = date('Y-m-d');
-        $listData = $this->model->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id where date = '$now'")->get();
+        $karpet = $this->get('karpet');
+        if (isset($karpet) && $karpet == 'true') {
+            $listData = $this->model->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id where date = '$now' and  wash_type_id = 6")->get();
+        } else {
+            $listData = $this->model->rawQuery("SELECT transactions.*, wash_types.name as wash_type_name FROM transactions LEFT JOIN wash_types ON wash_types.id = transactions.wash_type_id where date = '$now' and  wash_type_id != 6")->get();
+        }
         $data = [];
         if ($listData->num_rows > 0) {
             while ($row = $listData->fetch_assoc()) {

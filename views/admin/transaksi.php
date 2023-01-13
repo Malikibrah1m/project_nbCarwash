@@ -54,7 +54,7 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Transaksi </h4>
 
-                        <div class="card">
+                        <div class="card mb-4">
                             <h5 class="card-header">Data Transaksi</h5>
 
                             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
@@ -71,6 +71,33 @@
                                                 <th>Plat Nomor</th>
                                                 <th>Merk Kendaraan</th>
                                                 <th>Waktu</th>
+                                                <th>Total harga</th>
+                                                <th>Tanggal</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h5 class="card-header">Data Transaksi Karpet</h5>
+
+                            <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
+                                </pre>
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table" id="transaksiKarpet">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>id</th>
+                                                <th>Bukti</th>
+                                                <th>Nama</th>
+                                                <th>No. Hp</th>
                                                 <th>Total harga</th>
                                                 <th>Tanggal</th>
                                                 <th>Aksi</th>
@@ -107,6 +134,7 @@
     <script>
         $(document).ready(function() {
             loadTransTable();
+            loadTransKarpet();
             // $('.paginate_button.current').addClass('btn btn-primary')
             // $('.paginate_button.previous.disabled').addClass('btn btn-default')
             // $('.paginate_button.next.disabled').addClass('btn btn-default')
@@ -156,6 +184,63 @@
                     {
                         data: 'time',
                         name: 'time'
+                    },
+                    {
+                        data: 'total',
+                        name: 'total'
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        render: function(data, type, row) {
+                            return `<button onclick="hapus('` + row.id + `')" class="btn btn-icon me-2 btn-danger"><span class="tf-icons bx bx-trash"></span></button>`;
+                        }
+                    }
+                ],
+            });
+        }
+
+        function loadTransKarpet() {
+            var url = "<?= BASE_URL ?>transaksi/data_trans?karpet=true";
+            $('#transaksiKarpet').DataTable({
+                "language": {
+                    "emptyTable": "Transaksi kosong",
+                },
+                searching: false,
+                destroy: true,
+                "ordering": false,
+                ajax: url,
+                columns: [{
+                        data: null,
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        data: 'id',
+                        name: 'id',
+                        visible: false
+                    },
+
+                    {
+                        data: 'bukti',
+                        name: 'bukti',
+                        render: function(data, type, row) {
+                            console.log(data);
+                            return `<img src="<?= BASE_URL ?>assets/img/bukti/` + data + `" alt="" width="150" height="100">`;
+                        }
+                    },
+                    {
+                        data: 'name',
+                        name: 'name',
+                    },
+                    {
+                        data: 'no_hp',
+                        name: 'no_hp'
                     },
                     {
                         data: 'total',
