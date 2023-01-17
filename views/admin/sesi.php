@@ -103,7 +103,7 @@
                                 </div>
                             </div>
 
-                            <h5 class="card-header">Data Pengeluaran</h5>
+                            <h5 class="card-header">Data Sesi</h5>
                             <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
                                 <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#sesi">
                                     Tambah Data

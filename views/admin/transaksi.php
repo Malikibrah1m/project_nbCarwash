@@ -231,7 +231,11 @@
                         name: 'bukti',
                         render: function(data, type, row) {
                             console.log(data);
-                            return `<img src="<?= BASE_URL ?>assets/img/bukti/` + data + `" alt="" width="150" height="100">`;
+                            if (data == '') {
+                                return `<p>Bukti kosong..</p>`;
+                            }else{
+                                return `<img src="<?= BASE_URL ?>assets/img/bukti/` + data + `" alt="" width="150" height="100">`;
+                            }
                         }
                     },
                     {
